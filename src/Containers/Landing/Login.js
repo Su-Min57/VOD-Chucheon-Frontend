@@ -9,7 +9,7 @@ class Login extends Component {
                 <InputWithLabel label="셋톱번호" name="number" placeholder="셋톱번호"/>
                 <InputWithLabel label="비밀번호" name="password" placeholder="비밀번호" type="password"/>
                 <LoginButton>
-                    <Link to="/">
+                    <Link to="/main">
                         로그인
                     </Link>
                 </LoginButton>

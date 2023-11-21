@@ -8,7 +8,7 @@ const LoginBox = ({children}) => (
     <Positioner>
         <ShadowedBox>
             <LogoWrapper>
-                <Logo to="/">LG HelloVision : 환영</Logo>
+                <Logo to="/main">LG HelloVision : 환영</Logo>
             </LogoWrapper>
             <Contents>
                 {children}
