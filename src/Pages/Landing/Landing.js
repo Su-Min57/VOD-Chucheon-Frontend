@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import * as baseActions from '../redux/modules/base';
-import { LoginBox } from '../Components/Landing';
-import { Login } from "../Containers/Landing";
+import * as baseActions from '../../redux/modules/base';
+import { LoginBox } from "../../Components/Landing";
+import { Login } from "../../Containers/Landing";
 
 class Landing extends Component {
     //페이지에 진입 할 때 헤더를 비활성화
@@ -34,7 +34,7 @@ const Whole = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDA4MTlfMjkw%2FMDAxNTk3ODQzNjk1MTQw.pxImDlVRJZXDqI_XQOoW2WMmj6nVaolmOrvWudEldakg.XiT3x-x6WwwTz-YWuWjKJ1fzQuSLDjJx9BRCEYsjLiEg.PNG.your_gene%2F%25BD%25BA%25C5%25A9%25B8%25B0%25BC%25A6_2020-08-19_%25BF%25C0%25C8%25C4_8.06.25.png&type=sc960_832");
+    background-image: url("https://images.unsplash.com/photo-1545630478-cf62cdd247d1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fG1vdmllc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60");
 `;
 
 export default connect(

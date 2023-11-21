@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
-import { shadow, media } from '../../../lib/styleUtil'; 
+import { shadow, media } from '../../Utils/styleUtil';
+
+
 
 const Header = ({children}) => {
     return (
