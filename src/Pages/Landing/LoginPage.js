@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-//import oc from "open-color";
 import axios from 'axios';
 import { useAuth } from '../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -51,7 +50,7 @@ const LoginPage = () => {
               <input type="password" value={useIp} onChange={(e) => setUseIp(e.target.value)} />
             </Wrapper>
             <LoginButton onClick={handleLogin}>
-              로그인
+              로그인해줘.
             </LoginButton>
         </LoginContent>
       </LoginBox>
