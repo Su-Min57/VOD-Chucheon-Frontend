@@ -64,7 +64,7 @@ const StyledLoginPage = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-image: url("https://www.kukinews.com/data/kuk/image/2023/05/09/kuk202305090047.jpg");
+  background-color: pink;
   `;
 
 const Wrapper = styled.div`
