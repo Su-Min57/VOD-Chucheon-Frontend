@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const [cookies, , removeCookie] = useCookies(['accessToken', 'refreshToken']);
+  const [, removeCookie] = useCookies(['accessToken', 'refreshToken']);
 
   const handleLogout = () => {
     // 쿠키 삭제
