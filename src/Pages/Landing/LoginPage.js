@@ -64,7 +64,7 @@ const StyledLoginPage = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-image: url("https://img.sbs.co.kr/newsnet/etv/upload/2022/10/07/30000795252_1280.jpg");
+  background-image: url("https://www.kukinews.com/data/kuk/image/2023/05/09/kuk202305090047.jpg");
   `;
 
 const Wrapper = styled.div`
