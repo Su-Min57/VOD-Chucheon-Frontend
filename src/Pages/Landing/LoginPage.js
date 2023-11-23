@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import oc from "open-color";
+//import oc from "open-color";
 import axios from 'axios';
 import { useAuth } from '../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
