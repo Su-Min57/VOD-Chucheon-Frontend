@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import oc from "open-color";
 import axios from 'axios';
 import { useAuth } from '../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -51,7 +50,7 @@ const LoginPage = () => {
               <input type="password" value={useIp} onChange={(e) => setUseIp(e.target.value)} />
             </Wrapper>
             <LoginButton onClick={handleLogin}>
-              로그인
+              로그인해줘.
             </LoginButton>
         </LoginContent>
       </LoginBox>
@@ -65,7 +64,7 @@ const StyledLoginPage = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-image: url("https://img.sbs.co.kr/newsnet/etv/upload/2022/10/07/30000795252_1280.jpg");
+  background-color: pink;
   `;
 
 const Wrapper = styled.div`
