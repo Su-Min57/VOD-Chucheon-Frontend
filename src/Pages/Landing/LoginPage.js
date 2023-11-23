@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import styled from "styled-components";
+import oc from "open-color";
 import axios from 'axios';
 import { useAuth } from '../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { LoginBox, LoginButton, LoginContent } from '.'; 
 
 const LoginPage = () => {
   const [subsr, setSubsr] = useState('');
@@ -40,17 +43,55 @@ const LoginPage = () => {
   };
 
   return (
+    <StyledLoginPage>
+      <LoginBox>
+        <LoginContent title="로그인">
+            <Wrapper>
+              <input type="text" value={subsr} onChange={(e) => setSubsr(e.target.value)} />
+              <input type="password" value={useIp} onChange={(e) => setUseIp(e.target.value)} />
+            </Wrapper>
+            <LoginButton onClick={handleLogin}>
+              로그인
+            </LoginButton>
+        </LoginContent>
+      </LoginBox>
+    </StyledLoginPage>
+  );
+};
+
+const StyledLoginPage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("https://img.sbs.co.kr/newsnet/etv/upload/2022/10/07/30000795252_1280.jpg");
+  `;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  width: 300px;
+  padding: 70px;
+`;
+
+export default LoginPage;
+
+
+/*
+  return (
     <div>
-      <h1>Login</h1>
+      <h1>로그인</h1>
       <label>Subsr: </label>
       <input type="text" value={subsr} onChange={(e) => setSubsr(e.target.value)} />
       <br />
       <label>Use IP: </label>
       <input type="password" value={useIp} onChange={(e) => setUseIp(e.target.value)} />
       <br />
-      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleLogin}>로그인</button>
     </div>
   );
 };
-
-export default LoginPage;
+*/
