@@ -1,14 +1,14 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
-import Root from './Root';
+import ReactDOM from 'react-dom';
 import './index.css';
-import configureStore from './redux/configureStore';
-import reportWebVitals from './reportWebVitals';
+import Root from './Root';
+import { AuthProvider } from './Context/AuthContext'; 
 
-const store = configureStore();
-
-const root = document.getElementById('root');
-const rootInstance = createRoot(root);
-rootInstance.render(<Root store={store} />);
-
-reportWebVitals();
+ReactDOM.render(
+  <React.StrictMode>
+    <AuthProvider>
+      <Root />
+    </AuthProvider>
+  </React.StrictMode>,
+  document.getElementById('root')
+);

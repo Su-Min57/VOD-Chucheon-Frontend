@@ -1,23 +1,17 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Main, Landing } from './Pages';
-import HeaderContainer from "./Containers/Header/HeaderContainer"
-import { Provider } from 'react-redux';
-import { Login } from './Containers/Landing';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LoginPage from './Pages/Landing/LoginPage';
+import MainPage from './Pages/Main/MainPage';
 
-const Root = ({store}) => {
-        return (
-            <Provider store={store}>
-                <HeaderContainer/>
-                <BrowserRouter>
-                    <Routes>
-                        <Route exact path="/" element={<Landing />} />
-                        <Route path="/main" element={<Main />} />
-                        <Route path="/landing/login" element={<Login />} />
-                    </Routes>     
-                </BrowserRouter>
-            </Provider>
-        );
-}
+const Root = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/main" element={<MainPage />} />
+        <Route path="/" element={<LoginPage />} />
+      </Routes>
+    </Router>
+  );
+};
 
 export default Root;
