@@ -14,7 +14,7 @@ const LoginPage = () => {
   const handleLogin = async () => {
     console.log('Login button clicked');
     try {
-      const response = await axios.post('http://localhost:80/api/login/', {
+      const response = await axios.post('http://54.180.127.202/api/login/', {
         subsr: subsr,
         use_ip: useIp,
       });

@@ -1,0 +1,8 @@
+.image-box {
+    width: 100%;
+    height: 150px;
+    background-color: #ddd; /* 회색 배경색 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
