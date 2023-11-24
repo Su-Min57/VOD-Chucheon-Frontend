@@ -8,12 +8,14 @@ import MyInfoPage from './Pages/MyInfo/MyInfoPage';
 import SearchPage from './Pages/Search/SerchPage';
 import SurveyPage from './Pages/Survey/SurveyPage';
 import Footer from './Components/Footer';
+import PrivateRoute from './Components/PrivateRoute';
 
 const Root = () => {
   return (
     <Router>
         <Routes>
         <Route path="/" element={<LoginPage />} />
+        <Route element={<PrivateRoute />}></Route>
           <Route path="/main" element={<MainPage />} />
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/detail" element={<DetailPage />} />
