@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useAuth } from '../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { LoginBox, LoginButton, LoginContent } from '.'; 
+import Cookies from 'js-cookie';
 
 const LoginPage = () => {
   const [subsr, setSubsr] = useState('');
@@ -14,21 +15,23 @@ const LoginPage = () => {
   const handleLogin = async () => {
     console.log('Login button clicked');
     try {
-      const response = await axios.post('http://54.180.127.202/api/login/', {
+      const response = await axios.post('http://localhost:8000/api/login/', {
         subsr: subsr,
         use_ip: useIp,
       });
-  
+      
       if (response && response.data) {
         const { access, refresh } = response.data;
+
+        // 쿠키에 토큰 저장
+        Cookies.set('access_token', access);
+        Cookies.set('refresh_token', refresh);
         console.log('Access Token:', access);
         console.log('Refresh Token:', refresh);
   
-        localStorage.setItem('accessToken', access);
-        localStorage.setItem('refreshToken', refresh);
-  
         login();
         navigate('/main'); // 로그인 성공 후 메인페이지로 이동
+        console.log('go main!')
       } else {
         console.error('Login failed: Invalid response format');
       }
