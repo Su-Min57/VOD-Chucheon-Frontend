@@ -28,18 +28,18 @@ const Footer = () => {
 };
 
 const FooterBox = styled.div`
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    bottom: 0px;
-    background-color: black;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  min-height: 10vh;
+  background-color: black;
+  width: 100%;
 `;
 
 const FooterLayout = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 980px;
+  width: 100%
   margin: 20px auto 0;
   padding: 0 4%;
   color: pink;
@@ -47,7 +47,8 @@ const FooterLayout = styled.div`
 
 const CompanyInfoLayout = styled.ul`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: left;
 `;
 
 const CompanyInfo = styled.li`
