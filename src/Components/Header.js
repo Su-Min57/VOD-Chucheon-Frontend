@@ -1,69 +1,54 @@
-import React from "react";
+//Header 전체 전환 페이지들을 하나로 묶어서 
+//Root.js로 가져가는 페이지
+
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from 'react-router-dom';
+import HeaderCategory from "./HeaderCategory";
+import HeaderPlus from "./HeaderPlus";
 
 const Header = () => {
-  const navigate = useNavigate();
+  const [isScroll, setIsScroll] = useState(false);
 
-  const changePage = path => {
-    navigate(path);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScroll(true);
+      } else if (window.scrollY === 0) {
+        setIsScroll(false);
+      }
+    };
 
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  //JSX 렌더링
   return (
-    <List>
-      <Logo>
-        <LogoLink>
-          <LogoImg src="/images/LG_logo.png" />
-        </LogoLink>
-      </Logo>
-      <GenreList>
-        <Listcusor onClick={() => changePage("/main")}>홈</Listcusor>
-      </GenreList>
-      <GenreList>
-        <Listcusor onClick={() => changePage("/genre/drama")}>
-          TV 드라마
-        </Listcusor>
-      </GenreList>
-      <GenreList>
-        <Listcusor onClick={() => changePage("/genre/movie")}>TV방송</Listcusor>
-      </GenreList>
-      <GenreList>
-        <Listcusor onClick={() => changePage("/wishlists")}>
-          영화
-        </Listcusor>
-      </GenreList>
-    </List>
+    <>
+      <HeaderNormalLayout isScroll={isScroll}>
+        <HeaderLayout>
+          <HeaderCategory />
+          <HeaderPlus />
+        </HeaderLayout>
+      </HeaderNormalLayout>
+    </>
   );
 };
 
-const List = styled.ul`
-  display: flex;
-  align-items: center;
+const HeaderNormalLayout = styled.div`
+  top: 0;
+  position: ${props => (props.isScroll ? "sticky" : "relative")};
+  width: 100%;
+  background: ${props => (props.isScroll ? "rgb(15, 15, 15)" : "transparent")};
+  z-index: 999;
   background-color: black;
 `;
 
-const Logo = styled.li`
-  margin: 15px 50 0 60px;
+const HeaderLayout = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
-
-const LogoLink = styled.a`
-  height: 68px;
-`;
-
-const LogoImg = styled.img`
-  width: 100px;
-  height: 38px;
-`;
-
-const GenreList = styled.li`
-  color: #b3b3b3;
-  font-size: 15px;
-  margin: 5px 0 0 60px;
-`;
-
-const Listcusor = styled.div`
-  cursor: pointer;
-`;
-
 
 export default Header;
