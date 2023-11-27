@@ -9,10 +9,13 @@ import SearchPage from './Pages/Search/SerchPage';
 import SurveyPage from './Pages/Survey/SurveyPage';
 import Footer from './Components/Footer';
 import PrivateRoute from './Components/PrivateRoute';
+import Header from './Components/Header';
+
 
 const Root = () => {
   return (
     <Router>
+      <Header />
         <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route element={<PrivateRoute />}></Route>
