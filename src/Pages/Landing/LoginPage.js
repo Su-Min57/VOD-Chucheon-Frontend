@@ -10,7 +10,7 @@ const LoginPage = () => {
   const [subsr, setSubsr] = useState('');
   const [useIp, setUseIp] = useState('');
   const { login } = useAuth();
-  const navigate = useNavigate(); // useHistory 대신 useNavigate를 사용
+  const navigate = useNavigate(); // useNavigate를 사용
 
   const handleLogin = async () => {
     console.log('Login button clicked');
@@ -67,7 +67,7 @@ const StyledLoginPage = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: yellow;
+  background-color: black;
   `;
 
 const Wrapper = styled.div`

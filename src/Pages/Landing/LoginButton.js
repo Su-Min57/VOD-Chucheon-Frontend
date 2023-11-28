@@ -14,7 +14,7 @@ const Wrapper = styled.div`
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 
-    background: ${oc.teal[6]};
+    background: rgb(196,8,79);
     color: white;
 
     text-align: center;
@@ -26,7 +26,7 @@ const Wrapper = styled.div`
     transition: .2s all;
 
     &:hover {
-        background: ${oc.teal[5]};
+        background: pink;
         ${shadow(0)}
     }
 
