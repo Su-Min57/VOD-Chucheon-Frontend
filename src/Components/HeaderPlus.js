@@ -1,15 +1,28 @@
+// //상단바의 기타 검색창, 로그인 박스, 로그아웃 버튼(예정)
+
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faBell, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { useCookies } from 'react-cookie';
+
+
 
 const HeaderPlus = () => {
+  const navigate = useNavigate();
   const [searchHiddenBar, setSearchHiddenBar] = useState(true);
   const [bellHiddenBox, setBellHiddenBox] = useState(true);
   const [loginHiddenBox, setLoginHiddenBox] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [, removeCookie] = useCookies(['accessToken', 'refreshToken']);
+
 
   const handleSearch = () => {
     setSearchHiddenBar((searchHiddenBar) => !searchHiddenBar);
+    if (!searchHiddenBar && searchQuery.trim() !== "") {
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
   };
 
   const handleBellBox = () => {
@@ -18,6 +31,19 @@ const HeaderPlus = () => {
 
   const handleLoginBox = () => {
     setLoginHiddenBox((loginHiddenBox) => !loginHiddenBox);
+  };
+
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleLogout = () => {
+    // 로그아웃 관련 작업을 여기에 수행: 쿠키 삭제, 로그인 페이지로 리디렉션
+    removeCookie('accessToken');
+    removeCookie('refreshToken');
+    console.log("로그아웃 클릭");
+    // 로그인 페이지로 리디렉션하는 navigate 사용
+    navigate('/');
   };
 
   return (
@@ -29,7 +55,11 @@ const HeaderPlus = () => {
           </button>
         ) : (
           <SearchBar>
-            <SearchBarInput />
+            <SearchBarInput
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            />
             <SearchBarIcon icon={faSearch} onClick={handleSearch} />
           </SearchBar>
         )}
@@ -44,17 +74,29 @@ const HeaderPlus = () => {
           </BellHiddenBox>
         )}
       </HeaderRightLayout>
+      <HeaderRightLayout>
+        {/* 로그아웃 버튼 추가 */}
+        <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
+      </HeaderRightLayout>
       <HeaderLogin>
         <button onMouseEnter={handleLoginBox}>
           <HeaderLoginImg src="/images/my_logo.png" />
         </button>
         {!loginHiddenBox && <LoginHiddenBox onMouseLeave={handleLoginBox} />}
-
         <HeaderRightIcon icon={faCaretDown} />
       </HeaderLogin>
     </HeaderRightList>
   );
 };
+
+// 로그아웃 버튼 스타일드 컴포넌트 추가
+const LogoutButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+`;
+
 
 const HeaderRightList = styled.div`
   display: flex;
