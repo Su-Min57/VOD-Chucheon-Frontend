@@ -28,6 +28,7 @@ const LoginPage = () => {
         Cookies.set('refresh_token', refresh);
         console.log('Access Token:', access);
         console.log('Refresh Token:', refresh);
+        localStorage.setItem('subsr', subsr)
   
         login();
         navigate('/main'); // 로그인 성공 후 메인페이지로 이동
@@ -53,7 +54,7 @@ const LoginPage = () => {
               <input type="password" value={useIp} onChange={(e) => setUseIp(e.target.value)} />
             </Wrapper>
             <LoginButton onClick={handleLogin}>
-              로그인해줘.
+              로그인
             </LoginButton>
         </LoginContent>
       </LoginBox>

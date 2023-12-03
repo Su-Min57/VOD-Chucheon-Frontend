@@ -1,11 +1,11 @@
-// 상단바 생김새 및 구조 만드는 페이지
-
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const HeaderCategory = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { pathname } = location;
 
   const changePage = path => {
     navigate(path);
@@ -18,21 +18,20 @@ const HeaderCategory = () => {
           <LogoImg src="/images/LG_logo.png" />
         </LogoLink>
       </Logo>
-      <CategoryList>
-        <Listcusor onClick={() => changePage("/main")}>홈</Listcusor>
+      <CategoryList active={pathname === '/main'} onClick={() => changePage("/main")}>
+        홈
       </CategoryList>
-      <CategoryList>
-        <Listcusor onClick={() => changePage("/Category/tvdrama")}>
-          TV 드라마
-        </Listcusor>
+      <CategoryList active={pathname === '/Category/tvdrama'} onClick={() => changePage("/Category/tvdrama")}>
+        TV 드라마
       </CategoryList>
-      <CategoryList>
-        <Listcusor onClick={() => changePage("/Category/tvshow")}>TV방송</Listcusor>
+      <CategoryList active={pathname === '/Category/tvshow'} onClick={() => changePage("/Category/tvshow")}>
+        TV방송
       </CategoryList>
-      <CategoryList>
-        <Listcusor onClick={() => changePage("/Category/movie")}>
-          영화
-        </Listcusor>
+      <CategoryList active={pathname === '/Category/movie'} onClick={() => changePage("/Category/movie")}>
+        영화
+      </CategoryList>
+      <CategoryList active={pathname === '/search'} onClick={() => changePage("/search")}>
+        검색
       </CategoryList>
     </List>
   );
@@ -41,11 +40,13 @@ const HeaderCategory = () => {
 const List = styled.ul`
   display: flex;
   align-items: center;
-  background-color: black;
+  height: 80px;
+  background-color: #181818;
+  list-style-type: none;
 `;
 
 const Logo = styled.li`
-  margin: 15px 50 0 60px;
+  margin: 15px 50px 0 60px;
 `;
 
 const LogoLink = styled.a`
@@ -53,19 +54,33 @@ const LogoLink = styled.a`
 `;
 
 const LogoImg = styled.img`
-  width: 100px;
-  height: 38px;
+  margin: 0;
+  width: 200px;
+  height: 60px;
+  align-items: center;
 `;
 
 const CategoryList = styled.li`
-  color: #b3b3b3;
-  font-size: 15px;
-  margin: 5px 0 0 60px;
-`;
+  color: ${props => (props.active ? '#ED174D' : 'white')};
+  font-size: 20px;
+  margin: 5px 10px 10px 60px;
+  position: relative;
 
-const Listcusor = styled.div`
-  cursor: pointer;
-`;
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: ${props => (props.active ? '#ED174D' : 'transparent')};
+    bottom: 0;
+    left: 0;
+    transition: background-color 0.3s ease;
+  }
 
+  &:hover {
+    color: #ED174D;
+  }
+`;
 
 export default HeaderCategory;

@@ -31,7 +31,7 @@ const ShadowedBox = styled.div`
 
 //로고
 const LogoWrapper = styled.div`
-    background: ${oc.pink[6]};
+    background: #ED174D;
     height: 5rem;
     display: flex;
     align-items: center;
@@ -52,7 +52,7 @@ const Contents = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
-    background: grey;
+    background: lightgrey;
     padding: 2rem;
     height: auto;
 `;
