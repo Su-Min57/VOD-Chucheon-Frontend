@@ -43,7 +43,7 @@ const HeaderNormalLayout = styled.div`
   width: 100%;
   background: ${props => (props.isScroll ? "rgb(15, 15, 15)" : "transparent")};
   z-index: 999;
-  background-color: black;
+  background-color: #181818;
 `;
 
 const HeaderLayout = styled.div`

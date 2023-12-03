@@ -18,17 +18,6 @@ const HeaderPlus = () => {
   const [, removeCookie] = useCookies(['accessToken', 'refreshToken']);
 
 
-  const handleSearch = () => {
-    setSearchHiddenBar((searchHiddenBar) => !searchHiddenBar);
-    if (!searchHiddenBar && searchQuery.trim() !== "") {
-      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-    }
-  };
-
-  const handleBellBox = () => {
-    setBellHiddenBox((bellHiddenBox) => !bellHiddenBox);
-  };
-
   const handleLoginBox = () => {
     setLoginHiddenBox((loginHiddenBox) => !loginHiddenBox);
   };
@@ -48,32 +37,6 @@ const HeaderPlus = () => {
 
   return (
     <HeaderRightList>
-      <HeaderRightLayout>
-        {searchHiddenBar ? (
-          <button onClick={handleSearch}>
-            <HeaderRightIcon icon={faSearch} />
-          </button>
-        ) : (
-          <SearchBar>
-            <SearchBarInput
-              value={searchQuery}
-              onChange={handleSearchInputChange}
-              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-            />
-            <SearchBarIcon icon={faSearch} onClick={handleSearch} />
-          </SearchBar>
-        )}
-      </HeaderRightLayout>
-      <HeaderRightLayout>
-        <button onMouseEnter={handleBellBox}>
-          <HeaderRightIcon icon={faBell} />
-        </button>
-        {!bellHiddenBox && (
-          <BellHiddenBox onMouseLeave={handleBellBox}>
-            최근 알림 메시지가 없습니다.
-          </BellHiddenBox>
-        )}
-      </HeaderRightLayout>
       <HeaderRightLayout>
         {/* 로그아웃 버튼 추가 */}
         <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
@@ -95,14 +58,14 @@ const LogoutButton = styled.button`
   border: none;
   cursor: pointer;
   color: white;
+  font-size: 20px;
 `;
-
 
 const HeaderRightList = styled.div`
   display: flex;
   align-items: center;
   margin: 18px 60px;
-  background-color: black;
+  background-color: #181818;
 `;
 
 const HeaderRightLayout = styled.div`
@@ -112,7 +75,7 @@ const HeaderRightLayout = styled.div`
 `;
 
 const HeaderRightIcon = styled(FontAwesomeIcon)`
-  font-size: 1.5em;
+  font-size: 1.5pm;
   color: ${({ theme }) => theme.buttonGray};
 `;
 
@@ -125,36 +88,6 @@ const HeaderLogin = styled.div`
 const HeaderLoginImg = styled.img`
   width: 32px;
   height: 32px;
-`;
-
-const SearchBar = styled.div`
-  position: relative;
-  width: 200px;
-  height: 30px;
-  border: 2px solid ${({ theme }) => theme.buttonGray};
-`;
-
-const SearchBarInput = styled.input`
-  height: 24px;
-  margin: 2px 0 0 29px;
-`;
-
-const SearchBarIcon = styled(FontAwesomeIcon)`
-  position: absolute;
-  top: 4px;
-  left: 5px;
-  font-size: 1.3em;
-  color: ${({ theme }) => theme.buttonGray};
-`;
-
-const BellHiddenBox = styled.div`
-  position: absolute;
-  top: 30px;
-  right: 0;
-  width: 408px;
-  height: 116px;
-  background-color: black;
-  opacity: 0.7;
 `;
 
 const LoginHiddenBox = styled.div`
