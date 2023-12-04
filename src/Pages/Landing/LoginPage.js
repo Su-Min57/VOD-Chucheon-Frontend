@@ -48,10 +48,10 @@ const LoginPage = () => {
   return (
     <StyledLoginPage>
       <LoginBox>
-        <LoginContent title="로그인">
+        <LoginContent title="환영합니다">
             <Wrapper>
-              <input type="text" value={subsr} onChange={(e) => setSubsr(e.target.value)} />
-              <input type="password" value={useIp} onChange={(e) => setUseIp(e.target.value)} />
+              <input type="text" placeholder="셋톱번호" value={subsr} onChange={(e) => setSubsr(e.target.value)} />
+              <input type="password" placeholder="비밀번호" value={useIp} onChange={(e) => setUseIp(e.target.value)} />
             </Wrapper>
             <LoginButton onClick={handleLogin}>
               로그인
@@ -68,7 +68,7 @@ const StyledLoginPage = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: black;
+  background-color: white;
   `;
 
 const Wrapper = styled.div`
@@ -78,6 +78,14 @@ const Wrapper = styled.div`
   position: relative;
   width: 300px;
   padding: 70px;
+
+  /* 스타일 추가 */
+  & input {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 20px;
+    background-color: pink;
+  }
 `;
 
 export default LoginPage;

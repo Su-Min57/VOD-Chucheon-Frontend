@@ -27,11 +27,13 @@ const Positioner = styled.div`
 //너비, 그림자 설정
 const ShadowedBox = styled.div`
     width: 500px;
+    border: none;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 `;
 
 //로고
 const LogoWrapper = styled.div`
-    background: #ED174D;
+    background: ${oc.white[0]};
     height: 5rem;
     display: flex;
     align-items: center;
@@ -40,10 +42,11 @@ const LogoWrapper = styled.div`
 `;
 
 const Logo = styled(Link)`
-    color: white;
+    color: ${oc.pink[8]};
     font-family: 'Roboto';
     font-size: 2.4rem;
-    letter-spacing: 5px;
+    font-weight: bold;
+    letter-spacing: 2px;
     text-decoration: none;
 `;
 
@@ -52,7 +55,7 @@ const Contents = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
-    background: lightgrey;
+    background: white;
     padding: 2rem;
     height: auto;
 `;

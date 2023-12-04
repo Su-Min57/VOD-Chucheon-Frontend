@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import RowforReal from '../../Components/RowforReal';
+import Row from '../../Components/Row';
 
 const MainPage = () => {
   const [recommendations1, setRecommendations1] = useState([]);
@@ -73,6 +73,42 @@ const MainPage = () => {
       });
   }, []);
 
+
+  return (
+    <div>
+      <h2>🔥 시간별 추천 🔥</h2>
+      {recommendations1.length > 0 ? (
+        <Row data={recommendations1.slice(0, 20)} />
+      ) : (
+        <div style={{ background: 'lightgray', padding: '10px' }}>
+          No Recommendations1 available.
+        </div>
+      )}
+
+      <h2>🔥 가장 선호하는 장르 추천해드려요 🔥</h2>
+      {recommendations2.length > 0 ? (
+        <Row data={recommendations2.slice(0, 20)} />
+      ) : (
+        <div style={{ background: 'lightgray', padding: '10px' }}>
+          No Recommendations2 available.
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default MainPage;
+
+
+
+
+
+
+
+
+
+
+/* 수빈 작업
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -91,6 +127,7 @@ const MainPage = () => {
     slidesToScroll: 1,
     vertical: false,
   };
+
 
 
   return (
@@ -117,7 +154,8 @@ const MainPage = () => {
             <Slider {...manualSliderSettings}>
               {Array.from({ length: Math.ceil(recommendations2.length / 5) }).map((_, index) => (
                 <div key={index} style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto' }}>
-                  {/* 각 슬라이드에 5개의 이미지 표시 */}
+                  {/* 각 슬라이드에 5개의 이미지 표시 */
+                  /*
                   {recommendations2.slice(index * 5, (index + 1) * 5).map((program, programIndex) => (
                     <div key={programIndex} style={{ margin: '5px', flex: '0 0 auto' }}>
                       <img
@@ -142,4 +180,6 @@ const MainPage = () => {
       </div>
     );
   };
+
 export default MainPage;
+*/

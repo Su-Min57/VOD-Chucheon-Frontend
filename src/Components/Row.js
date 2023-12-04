@@ -1,44 +1,46 @@
-import React, { useState, useEffect } from 'react';
+// Row.jsx
+import React from 'react';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.min.css';
-import axios from 'axios';
+import 'swiper/swiper-bundle.css';
+import { useNavigate } from 'react-router-dom';
 
-const Row = ({ genre, loggedInUser }) => {
-  const [movies, setMovies] = useState([]);
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`http://your-api-endpoint.com/favorite-genre-movies/${loggedInUser}?genre=${genre}`);
-        const randomMovies = getRandomMovies(response.data, 7);
-        setMovies(randomMovies);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+const Row = ({ data, isRecommendations2 }) => {
+  const navigate = useNavigate();
 
-    fetchData();
-  }, [genre, loggedInUser]);
-
-  const getRandomMovies = (array, n) => {
-    const shuffled = array.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, n);
+  const handleWatchClick = () => {
+    navigate('/detailPage');
   };
 
   return (
-    <div>
-      <h2>{genre} Movies for User {loggedInUser}</h2>
-      <Swiper spaceBetween={20} slidesPerView={3} navigation pagination={{ clickable: true }}>
-        {movies.map((movie, index) => (
-          <SwiperSlide key={index}>
-            <div>
-              <img src={movie.imageUrl} alt={`Movie ${index + 1}`} />
-              <p>{movie.title}</p>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
+    <Swiper
+      spaceBetween={10}
+      slidesPerView={1}
+      navigation
+      pagination={{ clickable: true }}
+      scrollbar={{ draggable: true }}
+    >
+      {data.map((program, index) => (
+        <SwiperSlide key={index} style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <div style={{ margin: '5px', padding: '15px', width: '50%' }}>
+            {program.image && (
+              <img src={program.image} alt={program.asset_nm} style={{ maxWidth: '100%', height: 'auto' }} />
+            )}
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '50%', marginLeft: isRecommendations2 ? '0' : '-400px' }}>
+            {isRecommendations2 ? null : (
+              <>
+                <p style={{ fontSize: '30px', fontWeight: 'bold', marginBottom: '10px' }}><strong></strong> {program.asset_nm}</p>
+                <p style={{ marginBottom: '10px' }}><strong></strong> {program.SMRY}</p>
+                <button style={{ padding: '8px 10px', fontSize: '16px', backgroundColor: '#ED174D', color: 'white', border: 'none', cursor: 'pointer', marginTop: '10px' }} onClick={handleWatchClick}>시청하기</button>
+              </>
+            )}
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 };
 

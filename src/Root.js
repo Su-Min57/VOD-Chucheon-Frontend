@@ -14,6 +14,7 @@ import Header from './Components/Header';
 import TVshow from './Pages/Category/TVshow';
 import TVdrama from './Pages/Category/TVdrama';
 import Movie from './Pages/Category/Movie';
+
 const MainLayout = () => {
   return (
     <>
