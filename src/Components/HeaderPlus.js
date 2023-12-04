@@ -42,7 +42,7 @@ const HeaderPlus = () => {
         <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
       </HeaderRightLayout>
       <HeaderLogin>
-        <button onMouseEnter={handleLoginBox}>
+        <button>   {/* onMouseEnter={handleLoginBox}  이거 추가하면 아이콘에 마우스 올리면 하단바 생성 */}
           <HeaderLoginImg src="/images/my_logo.png" />
         </button>
         {!loginHiddenBox && <LoginHiddenBox onMouseLeave={handleLoginBox} />}

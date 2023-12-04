@@ -23,12 +23,14 @@ const RowImage = ({ data }) => {
           <ImageContainer>
             {program.image ? (
               <img src={program.image}
-              alt={program.asset_nm}
+              alt={program.clean_asset_nm}
               style={{ width: '100%', height: '100%', objectFit:'contain'}} />
             ) : (
-            <NoImageText>No Image</NoImageText>
+            <NoImageContainer>
+                <NoImageText>No Image</NoImageText>
+            </NoImageContainer>
             )}
-            <p>{program.asset_nm}</p>
+            <p>{program.clean_asset_nm}</p>
           </ImageContainer>
         </SwiperSlide>
       ))}
@@ -47,17 +49,29 @@ const ImageContainer = styled.div`
   }
 `;
 
-const NoImageText = styled.div`
+const NoImageContainer = styled.div`
   color: gray;
   font-size: 16px;
-  margin-top: 0px;
-  width: 100%; /* 가로 폭을 100%로 설정하여 부모 요소에 맞게 크기 조절 */
-  height: 100%; /* 세로 높이를 100%로 설정하여 부모 요소에 맞게 크기 조절 */
-  box-sizing: border-box; /* border를 포함한 크기 계산을 위해 box-sizing 속성 추가 */
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid lightgray;
+  width: 100%; /* 가로 폭을 100%로 설정하여 부모 요소에 맞게 크기 조절 */
+  height: 0; /* 세로 높이를 0으로 설정하여 자식 요소에 맞게 크기 조절 */
+  padding-bottom: 150%; /* 이미지와 동일한 세로 비율을 유지하기 위한 값 (450 / 300 = 150%) */
+  box-sizing: border-box;
+`;
+
+const NoImageText = styled.div`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
 `;
 
 export default RowImage;
+

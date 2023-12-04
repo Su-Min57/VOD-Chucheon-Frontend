@@ -27,6 +27,7 @@ const SearchComponent = () => {
   };
 
   return (
+    <>
     <Container>
       <InputLabel>
         <Input type="text" value={programName} onChange={handleProgramNameChange} />
@@ -45,7 +46,7 @@ const SearchComponent = () => {
                       alt={program.clean_asset_nm}
                       style={{ width: '100%', height: '100%', objectFit:'contain'}} />
                 ) : (
-                  <NoImageText>No Image</NoImageText>
+                <NoImageText>No Image</NoImageText>
                 )}
                   <p>{program.clean_asset_nm}</p>
               </ProgramItem>
@@ -58,8 +59,17 @@ const SearchComponent = () => {
         <p>검색 결과가 없습니다.</p>
       )}
     </Container>
+    <BlackContainer>
+    </BlackContainer>
+    </>
   );
 };
+
+const BlackContainer = styled.div`
+  background-color: black;
+  width: 100vw; /* 100% viewport width */
+  height: 70vh; /* 100% viewport height */
+`;
 
 const Container = styled.div`
   display: flex;
@@ -138,28 +148,18 @@ const ProgramItem = styled.div`
   }
 `;
 
-const ImageContainer = styled.div`
-  margin-top: 20px;
-  padding: 15px;
-  width: 350px;
-  height: 450px; /* 고정 높이 설정 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid lightgray;
-`;
-
 const NoImageText = styled.div`
   color: gray;
   font-size: 16px;
   margin-top: 0px;
   width: 100%; /* 가로 폭을 100%로 설정하여 부모 요소에 맞게 크기 조절 */
-  height: 100%; /* 세로 높이를 100%로 설정하여 부모 요소에 맞게 크기 조절 */
+  height: 0; /* 세로 높이를 100%로 설정하여 부모 요소에 맞게 크기 조절 */
   box-sizing: border-box; /* border를 포함한 크기 계산을 위해 box-sizing 속성 추가 */
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid lightgray;
+  padding-bottom: 150%;
 `;
 
 export default SearchComponent;
