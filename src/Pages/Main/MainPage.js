@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Row from '../../Components/Row';
+import RowImage from '../../Components/RowImage';
 
 const MainPage = () => {
   const [recommendations1, setRecommendations1] = useState([]);
@@ -75,19 +76,21 @@ const MainPage = () => {
 
 
   return (
-    <div>
+    <div style={{ background: 'black', color: 'white', padding: '20px' }}>
       <h2>🔥 시간별 추천 🔥</h2>
-      {recommendations1.length > 0 ? (
-        <Row data={recommendations1.slice(0, 20)} />
-      ) : (
-        <div style={{ background: 'lightgray', padding: '10px' }}>
-          No Recommendations1 available.
-        </div>
-      )}
+      <div style={{ background: "rgba(169, 169, 169, 0.15)", padding: '10px', height: '500px'}}>
+        {recommendations1.length > 0 ? (
+          <Row data={recommendations1.slice(0, 20)} />
+        ) : (
+          <div style={{ background: 'lightgray', padding: '10px' }}>
+            No Recommendations1 available.
+          </div>
+        )}
+      </div>
 
       <h2>🔥 가장 선호하는 장르 추천해드려요 🔥</h2>
       {recommendations2.length > 0 ? (
-        <Row data={recommendations2.slice(0, 20)} />
+        <RowImage data={recommendations2.slice(0, 20)} />
       ) : (
         <div style={{ background: 'lightgray', padding: '10px' }}>
           No Recommendations2 available.
@@ -98,7 +101,6 @@ const MainPage = () => {
 };
 
 export default MainPage;
-
 
 
 
