@@ -3,17 +3,24 @@ import styled from "styled-components";
 import oc from "open-color";
 
 const LoginContent = ({title, children}) => (
-    <div>
+    <Wrapper>
         <Title>{title}</Title>
         {children}
-    </div>
+    </Wrapper>
 );
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+`;
 
 const Title = styled.div`
     text-align: left;
     font-size: 1.5rem;
-    font-weight: 500;
-    color: ${oc.gray[8]};
+    font-weight: bold;
+    color: ${oc.pink[8]};
     margin-bottom: 1rem;
 `;
 

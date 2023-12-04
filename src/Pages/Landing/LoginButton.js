@@ -10,28 +10,29 @@ const LoginButton = ({children, onClick}) => (
 );
 
 const Wrapper = styled.div`
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+    width: 300px;
 
-    background: #ED174D;
+    background: ${oc.pink[6]};;
     color: white;
 
     text-align: center;
     font-size: 1.25rem;
-    font-weight: 500;
+    font-weight: bold;
 
     cursor: pointer;
     user-select: none;
     transition: .2s all;
 
     &:hover {
-        background: #ED174D;
+        background: pink;
         ${shadow(0)}
     }
 
     &:active {
-        background: #ED174D;
+        background: ${oc.teal[7]};
     }
 
 `;
