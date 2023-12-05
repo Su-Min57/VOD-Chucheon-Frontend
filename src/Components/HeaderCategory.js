@@ -40,10 +40,10 @@ const HeaderCategory = () => {
 const List = styled.ul`
   display: flex;
   align-items: center;
-  height: 80px;
+  height: 60px;
   background-color: #181818;
   list-style-type: none;
-  margin: 15px -89px;
+  margin: 15px -100px;
 `;
 
 const Logo = styled.li`

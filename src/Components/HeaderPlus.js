@@ -19,11 +19,8 @@ const HeaderPlus = () => {
 
   return (
     <HeaderRightList>
-      <PinkBoxContainer>
+      <HeaderRightLayout>
             <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
-      </PinkBoxContainer>
-      <HeaderRightLayout onMouseEnter={() => setPinkBoxVisible(true)} onMouseLeave={() => setPinkBoxVisible(false)}>
-        {/* Your other components */}
       </HeaderRightLayout>
     </HeaderRightList>
   );
@@ -34,36 +31,31 @@ const LogoutButton = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: #181818;
+  margin: 0px 30px;
+  color: white;
+  background-color: #181818;
   font-size: 20px;
-`;
-
-// 핑크색 박스 스타일드 컴포넌트 추가
-const PinkBoxContainer = styled.div`
-  position: relative;
-`;
-
-const PinkBox = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: pink;
-  padding: 10px;
-  border-radius: 5px;
-  z-index: 1;
 `;
 
 const HeaderRightList = styled.div`
   display: flex;
   align-items: center;
-  margin: 18px 60px;
   background-color: #181818;
+  color: white;
+
+  &:hover {
+    background-color: #ED174D;
+
+    ${LogoutButton} {
+      background-color: #ED174D; /* Change LogoutButton background color on hover */
+    }
+  }
 `;
 
 const HeaderRightLayout = styled.div`
   display: flex;
   position: relative;
-  margin-right: 20px;
+  margin-left: -0px; /* Adjust the margin-left to move the button to the left */
 `;
 
 export default HeaderPlus;

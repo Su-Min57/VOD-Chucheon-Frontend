@@ -33,10 +33,7 @@ const Root = () => {
         <Route element={<MainLayout />}>
         <Route element={<PrivateRoute />}>
           <Route path="/main" element={<MainPage />} />
-          <Route path="/detail" element={<DetailPage />} />
-          <Route path="/myinfo" element={<MyInfoPage />} />
           <Route path="/search" element={<SearchPage />} />
-          <Route path="/survey" element={<SurveyPage />} />
           <Route path="/Category/movie" element={<Movie />} />
           <Route path="/Category/tvshow" element={<TVshow />} />
           <Route path="/Category/tvdrama" element={<TVdrama />} />
