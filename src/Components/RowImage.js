@@ -7,6 +7,14 @@ import 'swiper/swiper-bundle.css';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 const RowImage = ({ data }) => {
+  // Filter unique clean_asset_nm values
+  const uniqueData = data.reduce((unique, program) => {
+    if (!unique.find((item) => item.clean_asset_nm === program.clean_asset_nm)) {
+      unique.push(program);
+    }
+    return unique;
+  }, []);
+
   return (
     <Swiper
       spaceBetween={10}
@@ -18,17 +26,19 @@ const RowImage = ({ data }) => {
       <div className="swiper-pagination" style={{ display: 'none' }} />
       <div className="swiper-scrollbar" style={{ display: 'none' }} />
 
-      {data.map((program, index) => (
+      {uniqueData.map((program, index) => (
         <SwiperSlide key={index}>
           <ImageContainer>
             {program.image ? (
-              <img src={program.image}
-              alt={program.clean_asset_nm}
-              style={{ width: '100%', height: '100%', objectFit:'contain'}} />
+              <img
+                src={program.image}
+                alt={program.clean_asset_nm}
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+              />
             ) : (
-            <NoImageContainer>
+              <NoImageContainer>
                 <NoImageText>No Image</NoImageText>
-            </NoImageContainer>
+              </NoImageContainer>
             )}
             <p>{program.clean_asset_nm}</p>
           </ImageContainer>
@@ -41,7 +51,6 @@ const RowImage = ({ data }) => {
 const ImageContainer = styled.div`
   margin: 0.5px;
   padding: 5px;
-  /*border: 1px solid gray;*/ /* 선택: 테두리 추가 */
   text-align: center;
   img {
     max-width: 100%;
@@ -56,22 +65,21 @@ const NoImageContainer = styled.div`
   justify-content: center;
   align-items: center;
   border: 1px solid lightgray;
-  width: 100%; /* 가로 폭을 100%로 설정하여 부모 요소에 맞게 크기 조절 */
-  height: 0; /* 세로 높이를 0으로 설정하여 자식 요소에 맞게 크기 조절 */
-  padding-bottom: 150%; /* 이미지와 동일한 세로 비율을 유지하기 위한 값 (450 / 300 = 150%) */
+  width: 100%;
+  height: 0;
+  padding-bottom: 150%;
   box-sizing: border-box;
 `;
 
 const NoImageText = styled.div`
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
 `;
 
 export default RowImage;
-
