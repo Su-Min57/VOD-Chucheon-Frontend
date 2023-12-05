@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Slider from 'react-slick';
+//import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components'; // Import styled-components
@@ -39,7 +39,7 @@ const Movie = () => {
     return false;
   });
 
-  const groupedData = data.reduce((acc, program) => {
+  const groupedData = uniqueData.reduce((acc, program) => {
     const categoryL = program.category_l;
 
     if (!acc[categoryL]) {
@@ -89,7 +89,6 @@ const SliderContainer = styled.div`
 
 
 /*
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Slider from 'react-slick';

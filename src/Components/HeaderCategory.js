@@ -43,27 +43,29 @@ const List = styled.ul`
   height: 80px;
   background-color: #181818;
   list-style-type: none;
+  margin: 15px -89px;
 `;
 
 const Logo = styled.li`
-  margin: 15px 50px 0 60px;
+  margin: 0.1px 50px 0 80px;
 `;
 
 const LogoLink = styled.a`
-  height: 68px;
+    height: 68px;
 `;
 
 const LogoImg = styled.img`
   margin: 0;
-  width: 200px;
-  height: 60px;
+  width: 310px;
+  height: 300px;
+  object-fit: contain;
   align-items: center;
 `;
 
 const CategoryList = styled.li`
   color: ${props => (props.active ? '#ED174D' : 'white')};
   font-size: 20px;
-  margin: 5px 10px 10px 60px;
+  margin: 0px 20px 5px 60px;
   position: relative;
 
   &:after {
