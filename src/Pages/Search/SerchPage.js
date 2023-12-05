@@ -29,13 +29,12 @@ const SearchComponent = () => {
   return (
     <>
     <Container>
-      <InputLabel>
-        <Input type="text" value={programName} onChange={handleProgramNameChange} />
-        {programName === '' && <GuideText>영화 또는 TV프로그램명을 입력하세요.</GuideText>}
-      </InputLabel>
-      <SearchButton onClick={handleSearch}>검색</SearchButton>
-
-      {programData && programData.length > 0 && (
+        <InputLabel>
+          <Input type="text" value={programName} onChange={handleProgramNameChange} />
+          {programName === '' && <GuideText>영화 또는 TV프로그램명을 입력하세요.</GuideText>}
+        </InputLabel>
+        <SearchButton onClick={handleSearch}>검색</SearchButton>
+        {programData && programData.length > 0 && (
         <SearchResult>
           <ProgramList>
             {programData.map((program, index) => (
@@ -46,7 +45,7 @@ const SearchComponent = () => {
                       alt={program.clean_asset_nm}
                       style={{ width: '100%', height: '100%', objectFit:'contain'}} />
                 ) : (
-                <NoImageText>No Image</NoImageText>
+                <NoImageText>No image</NoImageText>
                 )}
                   <p>{program.clean_asset_nm}</p>
               </ProgramItem>
@@ -79,11 +78,15 @@ const Container = styled.div`
   color: white;
 `;
 
+
 const InputLabel = styled.label`
   display: flex;
   position: relative;
-  margin-top: 30px;
+  margin-top: 100px;
   margin-bottom: 20px;
+  width: 350px;
+  height: 50px;
+  box-sizing: border-box;
 `;
 
 const Input = styled.input`
@@ -103,7 +106,7 @@ const GuideText = styled.span`
   font-size: 14px;
   color: gray;
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 12px;
   transform: translateY(-50%);
 `;
@@ -111,7 +114,7 @@ const GuideText = styled.span`
 const SearchButton = styled.button`
   background-color: #ED174D;
   color: white;
-  padding: 10px;
+  padding: 12px;
   font-size: 18px;
   cursor: pointer;
   border: none;
