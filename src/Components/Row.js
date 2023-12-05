@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import Slider from 'react-slick'; // 추가: react-slick 불러오기
 import 'slick-carousel/slick/slick.css'; // 추가: slick-carousel 스타일 불러오기

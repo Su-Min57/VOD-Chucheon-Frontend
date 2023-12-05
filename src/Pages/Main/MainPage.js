@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Slider from 'react-slick';
+// import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Row from '../../Components/Row';
@@ -181,80 +181,3 @@ export default MainPage;
 
 
 
-
-
-/* 수빈 작업
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true, // 자동 재생 활성화
-    autoplaySpeed: 3000, // 슬라이드 간 시간 간격 (밀리초 단위)
-  };
-
-  const manualSliderSettings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    vertical: false,
-  };
-
-
-
-  return (
-      <div style={{ background: 'black', color: 'white', padding: '20px' }}>
-        {recommendations1.length > 0 ? (
-          <div style={{ background: 'rgba(169, 169, 169, 0.15)', padding: '10px', height: '500px'}}>
-            <Slider {...sliderSettings}>
-              {recommendations1.slice(0, 20).map((program, index) => (
-                <div key={index}>
-                  <RowforReal data={[program]} />
-                </div>
-              ))}
-            </Slider>
-          </div>
-        ) : (
-          <div style={{ background: 'lightgray', padding: '10px' }}>
-              추천 프로그램이 없습니다.
-          </div>
-        )}
-
-
-          <h2>가장 선호하는 장르 추천해드려요 🔥</h2>
-          {recommendations2.length > 0 ? (
-            <Slider {...manualSliderSettings}>
-              {Array.from({ length: Math.ceil(recommendations2.length / 5) }).map((_, index) => (
-                <div key={index} style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto' }}>
-                  {/* 각 슬라이드에 5개의 이미지 표시 */
-                  /*
-                  {recommendations2.slice(index * 5, (index + 1) * 5).map((program, programIndex) => (
-                    <div key={programIndex} style={{ margin: '5px', flex: '0 0 auto' }}>
-                      <img
-                        src={program.image}
-                        alt={program.asset_nm}
-                        style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </Slider>
-          ) : (
-            <div style={{ background: 'lightgray', padding: '10px' }}>
-              추천 프로그램이 없습니다.
-            </div>
-          )}
-      
-        
-        
-        <h2>가장 선호하는 장르 추천해드려요 🔥</h2>
-      </div>
-    );
-  };
-
-export default MainPage;
-*/

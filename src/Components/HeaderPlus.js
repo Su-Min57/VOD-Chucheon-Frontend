@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useCookies } from 'react-cookie';
@@ -6,7 +6,6 @@ import { useCookies } from 'react-cookie';
 const HeaderPlus = () => {
   const navigate = useNavigate();
   const [, removeCookie] = useCookies(['accessToken', 'refreshToken']);
-  const [pinkBoxVisible, setPinkBoxVisible] = useState(false);
 
   const handleLogout = () => {
     // 로그아웃 관련 작업을 여기에 수행: 쿠키 삭제, 로그인 페이지로 리디렉션
