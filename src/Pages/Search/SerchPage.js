@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import PopUp from '../../Components/Modal/PopUp';
 
 const SearchComponent = () => {
   const [programName, setProgramName] = useState('');
   const [programData, setProgramData] = useState(null);
+  const [selectedImage, setSelectedImage] = useState('');
+  const [selectedProgram, setSelectedProgram] = useState('');
+
 
   const handleProgramNameChange = (e) => {
     setProgramName(e.target.value);
@@ -26,6 +30,17 @@ const SearchComponent = () => {
     }
   };
 
+  //PopUp.js에서 사용할 data를 prop형태로 보내기 위한 구문
+  const openModal = (image, program) => {
+    setSelectedImage(image);
+    setSelectedProgram(program)
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+    setSelectedProgram(null);
+  };
+
   return (
     <>
     <Container>
@@ -38,16 +53,19 @@ const SearchComponent = () => {
         <SearchResult>
           <ProgramList>
             {programData.map((program, index) => (
-              <ProgramItem key={index}>
-                {program.image ? ( 
-                    <img 
-                      src={program.image} 
-                      alt={program.clean_asset_nm}
-                      style={{ width: '100%', height: '100%', objectFit:'contain'}} />
-                ) : (
-                <NoImageText>No image</NoImageText>
-                )}
-                  <p>{program.clean_asset_nm}</p>
+              <ProgramItem key={index} onClick={() => openModal(program.image, program)}>
+                  {program.image ? ( 
+                      <HoverImage
+                        src={program.image} 
+                        alt={program.clean_asset_nm}
+                        style={{ width: '100%', objectFit:'contain'}} // , height: '100%'
+                      />
+                  ) : (
+                  <NoImageContainer>
+                    <NoImageText>No image</NoImageText>
+                  </NoImageContainer>
+                  )}
+                    <p>{program.clean_asset_nm}</p>
               </ProgramItem>
             ))}
           </ProgramList>
@@ -57,6 +75,7 @@ const SearchComponent = () => {
       {programData && programData.length === 0 && (
         <p>검색 결과가 없습니다.</p>
       )}
+      <PopUp isOpen={!!selectedImage} onRequestClose={closeModal} imageUrl={selectedImage} program={selectedProgram} />
     </Container>
     <BlackContainer>
     </BlackContainer>
@@ -140,9 +159,10 @@ const ProgramItem = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  padding: 5px;
 
   img {
-    width: 200px;
+    width: 100%;
     height: auto;
   }
 
@@ -151,18 +171,36 @@ const ProgramItem = styled.div`
   }
 `;
 
-const NoImageText = styled.div`
+const NoImageContainer = styled.div`
   color: gray;
   font-size: 16px;
-  margin-top: 0px;
-  width: 100%; /* 가로 폭을 100%로 설정하여 부모 요소에 맞게 크기 조절 */
-  height: 0; /* 세로 높이를 100%로 설정하여 부모 요소에 맞게 크기 조절 */
-  box-sizing: border-box; /* border를 포함한 크기 계산을 위해 box-sizing 속성 추가 */
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid lightgray;
+  width: 100%;
+  height: 0;
   padding-bottom: 150%;
+  box-sizing: border-box;
+`;
+
+const NoImageText = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100%;
+  left: 0;
+`;
+
+const HoverImage = styled.img`
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.3s; /* 호버 효과를 위한 트랜지션 설정 */
+  &:hover {
+    transform: scale(1.1); /* 호버 시 이미지 확대 */
+  }
 `;
 
 export default SearchComponent;

@@ -24,7 +24,6 @@ const Header = () => {
     };
   }, []);
 
-  //JSX 렌더링
   return (
     <>
       <HeaderNormalLayout isScroll={isScroll}>
