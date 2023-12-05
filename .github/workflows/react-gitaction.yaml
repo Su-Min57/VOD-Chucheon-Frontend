@@ -1,16 +1,13 @@
 name: CI/CD hdev_client to AWS S3
-#name은 작업을 구분하기 위한 용도이므로 아무 이름이나 상관 없다.
 
-#on이 동작할 이벤트
 on:
   push:
     branches:
       - main
-  
-#실제 수행할 동작
+
 jobs:
   deploy:
-    runs-on: ubuntu-latest  #우분투에서 수행하겠다
+    runs-on: ubuntu-latest
     steps:
       - name: 코드 체크아웃
         uses: actions/checkout@v3
@@ -18,11 +15,10 @@ jobs:
       - name: AWS IAM 사용자 설정
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          #IAM 로그인 하는 부분
-          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}  
-          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}} #여기를 진짜 키 값 입력하면 키 노출됐다고 메일옴 -> 시크릿 모드로 입력
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           aws-region: ap-northeast-2
-      
+
       - name: 리액트 빌드
         run: |
           npm install
@@ -34,12 +30,64 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
 
-
       - name: CloudFront 캐시 무력화 설정
-          uses: chetan/invalidate-cloudfront-action@v2
-          env:
-            DISTRIBUTION: ${{ secrets.AWS_CLOUDFRONT_ID }}
-            PATHS: "/*"
-            AWS_REGION: ${{ secrets.AWS_REGION }}
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{secrets.AWS_CLOUDFRONT_ID}}
+          PATHS: "/*"
+          AWS_REGION: ${{secrets.AWS_REGION}}
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+
+
+
+
+
+
+
+
+# name: CI/CD hdev_client to AWS S3
+# #name은 작업을 구분하기 위한 용도이므로 아무 이름이나 상관 없다.
+
+# #on이 동작할 이벤트
+# on:
+#   push:
+#     branches:
+#       - main
+  
+# #실제 수행할 동작
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest  #우분투에서 수행하겠다
+#     steps:
+#       - name: 코드 체크아웃
+#         uses: actions/checkout@v3
+
+#       - name: AWS IAM 사용자 설정
+#         uses: aws-actions/configure-aws-credentials@v2
+#         with:
+#           #IAM 로그인 하는 부분
+#           aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}  
+#           aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}} #여기를 진짜 키 값 입력하면 키 노출됐다고 메일옴 -> 시크릿 모드로 입력
+#           aws-region: ap-northeast-2
+      
+#       - name: 리액트 빌드
+#         run: |
+#           npm install
+#           npm run build
+
+#       - name: 빌드 한 파일 S3에 업로드
+#         run: aws s3 sync build/ s3://${{secrets.AWS_S3_BUCKET}} --acl public-read
+#         env:
+#           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+#           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+
+
+#       - name: CloudFront 캐시 무력화 설정
+#           uses: chetan/invalidate-cloudfront-action@v2
+#           env:
+#             DISTRIBUTION: ${{ secrets.AWS_CLOUDFRONT_ID }}
+#             PATHS: "/*"
+#             AWS_REGION: ${{ secrets.AWS_REGION }}
+#             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
