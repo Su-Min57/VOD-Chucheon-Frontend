@@ -39,7 +39,7 @@ const TVdrama = () => {
     return false;
   });
 
-  const groupedData = data.reduce((acc, program) => {
+  const groupedData = uniqueData.reduce((acc, program) => {
     const categoryL = program.category_l;
 
     if (!acc[categoryL]) {

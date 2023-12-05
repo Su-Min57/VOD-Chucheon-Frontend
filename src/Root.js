@@ -9,7 +9,7 @@ import MyInfoPage from './Pages/MyInfo/MyInfoPage';
 import SearchPage from './Pages/Search/SerchPage';
 import SurveyPage from './Pages/Survey/SurveyPage';
 import Footer from './Components/Footer';
-//mport PrivateRoute from './Components/PrivateRoute';
+import PrivateRoute from './Components/PrivateRoute';
 import Header from './Components/Header';
 import TVshow from './Pages/Category/TVshow';
 import TVdrama from './Pages/Category/TVdrama';
@@ -24,13 +24,14 @@ const MainLayout = () => {
     </>
   );
 };
-//<Route element={<PrivateRoute />}></Route>
+// <Route element={<PrivateRoute />}></Route>
 const Root = () => {
   return (
     <Router>
       <Routes>
           <Route path="/" element={<LoginPage />} />
         <Route element={<MainLayout />}>
+        <Route element={<PrivateRoute />}>
           <Route path="/main" element={<MainPage />} />
           <Route path="/detail" element={<DetailPage />} />
           <Route path="/myinfo" element={<MyInfoPage />} />
@@ -39,6 +40,7 @@ const Root = () => {
           <Route path="/Category/movie" element={<Movie />} />
           <Route path="/Category/tvshow" element={<TVshow />} />
           <Route path="/Category/tvdrama" element={<TVdrama />} />
+        </Route>
         </Route>
       </Routes>
     </Router>
