@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import oc from 'open-color';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
@@ -77,6 +78,7 @@ const ContentContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin-left: 20px; // 이미지와 텍스트 사이 간격 조절
+  margin-right: 20px;
 `;
 
 const PopUpImage = styled.img`
@@ -89,16 +91,15 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 10px;
-  align-items: center;
+  align-items: left;
 `;
 
 const Button = styled.button`
-  background-color: #ED174D;
+  background-color: ${oc.pink[6]};
   color: white;
   padding: 10px;
-  margin: 0 10px;
-  font-size: 16px;
+  margin: 0 30px 0 0;
+  font-size: 18px;
   cursor: pointer;
   border: none;
 `;
@@ -110,18 +111,22 @@ const CloseButton = styled.button`
   background-color: transparent;
   color: white;
   border: none;
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: bold;
   cursor: pointer;
 `;
 
 const Title = styled.p`
-  font-size: 20px;
+  font-size: 40px;
   font-weight: bold;
-  margin-bottom: 10px;
+  color: white;
+  margin-bottom: 60px;
 `;
 
 const Description = styled.p`
-  margin-bottom: 10px;
+  margin-bottom: 50px;
+  font-size: 18px;
+  color: white;
 `;
 
 export default PopUp;
