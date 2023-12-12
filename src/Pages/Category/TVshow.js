@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 //import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Link } from 'react-scroll'; // Import Link from react-scroll
 import styled from 'styled-components'; // Import styled-components
 import RowImage from '../../Components/RowImage';
 
 const TVshow = () => {
   const [data, setData] = useState([]);
+  
 
   useEffect(() => {
     const postData = {
@@ -23,6 +25,9 @@ const TVshow = () => {
         console.error('Error fetching data:', error);
       });
   }, []);
+
+
+  const tvshowRef = useRef(null);
 
   if (data.length === 0) {
     return <div>Loading...</div>;
@@ -51,14 +56,19 @@ const TVshow = () => {
   }, {});
 
 
-
-  
-
   return (
-    <TVshowContainer>
+    <TVshowContainer ref={tvshowRef}>
       <h1>TV방송</h1>
+       {/* 동적으로 버튼 생성 */}
+       <ButtonContainer>
+        {Object.keys(groupedData).map(categoryL => (
+          <Link key={categoryL} to={categoryL} smooth duration={500} offset={-tvshowRef.current?.offsetTop || 0}>
+            <CategoryButton>#{categoryL}</CategoryButton>
+          </Link>
+        ))}
+      </ButtonContainer>
       {Object.entries(groupedData).map(([categoryL, programs]) => (
-        <div key={categoryL}>
+        <div key={categoryL} id={categoryL}>
           <h2>{categoryL}</h2>
           {/* RowImage 컴포넌트를 사용 */}
           <RowImage data={programs.slice(0, 30)} />
@@ -68,10 +78,29 @@ const TVshow = () => {
   );
 };
 
+export default TVshow;
+
+
 const TVshowContainer = styled.div`
-  background-color: black; /* Set the background color to black */
-  color: white; /* Set text color to white */
-  padding: 20px; /* Add some padding for better readability */
+  background-color: black; 
+  color: white;
+  padding: 20px; 
 `;
 
-export default TVshow;
+const ButtonContainer = styled.div`
+  display: flex;
+  max-width: 800px;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-bottom: 30px; 
+`;
+
+const CategoryButton = styled.button`
+  margin: 5px;
+  cursor: pointer;
+  background-color: #ED174D; 
+  color: white;
+  border: none;
+  padding: 0.9em 1.3em;
+  border-radius: 20px; /* 조절 가능한 값 */
+`;
