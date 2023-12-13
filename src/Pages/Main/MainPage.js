@@ -4,6 +4,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Row from '../../Components/Row';
 import RowImage from '../../Components/RowImage';
+import ADBanner from '../../Components/ADBanner';
 
 const MainPage = () => {
   const [recommendations1, setRecommendations1] = useState([]);
@@ -129,6 +130,7 @@ const MainPage = () => {
       });
   }, []);
 
+
   return (
     <div style={{ background: 'black', color: 'white', padding: '20px' }}>
       <h2>🦔 지금 시간대에 HOT한 프로그램이에요! 🦔</h2>
@@ -168,6 +170,8 @@ const MainPage = () => {
           No Recommendations4 available.
         </div>
       )}
+
+      <ADBanner />
 
     </div>
   );

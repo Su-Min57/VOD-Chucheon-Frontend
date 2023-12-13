@@ -25,7 +25,7 @@ const Row = ({ data, isRecommendations2 }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 2500,
   };
 
   return (
@@ -72,6 +72,7 @@ const ImageContainer = styled.div`
     margin-left: 5%;
   }
 `;
+
 const NoImageText = styled.p`
   color: gray;
   font-size: 16px;

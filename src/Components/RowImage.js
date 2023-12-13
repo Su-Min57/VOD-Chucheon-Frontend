@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
-import PopUp from './Modal/PopUp';
+import PopUp from './Modal/Modal';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
