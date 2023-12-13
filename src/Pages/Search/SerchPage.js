@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import PopUp from '../../Components/Modal/PopUp';
+import PopUp from '../../Components/Modal/Modal';
 
 const SearchComponent = () => {
   const [programName, setProgramName] = useState('');

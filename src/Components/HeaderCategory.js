@@ -1,18 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from 'react-router-dom';
+import Weather from "./Weather";
 
 const HeaderCategory = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
-
+  
   const changePage = path => {
     navigate(path);
   };
 
   return (
-    <List>
+    <Wrapper>
       <Logo>
         <LogoLink>
           <LogoImg src="/images/LG_logo.png" />
@@ -33,11 +34,14 @@ const HeaderCategory = () => {
       <CategoryList active={pathname === '/search'} onClick={() => changePage("/search")}>
         검색
       </CategoryList>
-    </List>
+      <WeatherContainer>
+        <Weather />
+      </WeatherContainer>
+    </Wrapper>
   );
 };
 
-const List = styled.ul`
+const Wrapper = styled.ul`
   display: flex;
   align-items: center;
   height: 60px;
@@ -83,6 +87,12 @@ const CategoryList = styled.li`
   &:hover {
     color: #ED174D;
   }
+`;
+
+const WeatherContainer = styled.div`
+  margin-left: 50px; /* 검색 아이콘 오른쪽으로 이동 */
+  display: flex;
+  align-items: center;
 `;
 
 export default HeaderCategory;

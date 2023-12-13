@@ -4,6 +4,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Row from '../../Components/Row';
 import RowImage from '../../Components/RowImage';
+import ADBanner from '../../Components/ADBanner';
 
 const MainPage = () => {
   const [recommendations1, setRecommendations1] = useState([]);
@@ -168,6 +169,8 @@ const MainPage = () => {
           No Recommendations4 available.
         </div>
       )}
+
+      <ADBanner />
 
     </div>
   );
