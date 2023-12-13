@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 //import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Link } from 'react-scroll'; // Import Link from react-scroll
 import styled from 'styled-components'; // Import styled-components
 import RowImage from '../../Components/RowImage';
 
@@ -23,6 +24,8 @@ const TVdrama = () => {
         console.error('Error fetching data:', error);
       });
   }, []);
+
+  const tvdramaRef = useRef(null);
 
   if (data.length === 0) {
     return <div>Loading...</div>;
@@ -55,10 +58,18 @@ const TVdrama = () => {
   
 
   return (
-    <TVdramaContainer>
+    <TVdramaContainer ref={tvdramaRef}>
       <h1>TV드라마</h1>
+      {/* 동적으로 버튼 생성 */}
+      <ButtonContainer>
+      {Object.keys(groupedData).map(categoryL => (
+        <Link key={categoryL} to={categoryL} smooth duration={500} offset={-tvdramaRef.current?.offsetTop || 0}>
+          <CategoryButton>#{categoryL}</CategoryButton>
+        </Link>
+      ))}
+      </ButtonContainer>
       {Object.entries(groupedData).map(([categoryL, programs]) => (
-        <div key={categoryL}>
+        <div key={categoryL} id={categoryL}>
           <h2>{categoryL}</h2>
           {/* RowImage 컴포넌트를 사용 */}
           <RowImage data={programs.slice(0, 30)} />
@@ -68,10 +79,29 @@ const TVdrama = () => {
   );
 };
 
+export default TVdrama;
+
+
 const TVdramaContainer = styled.div`
   background-color: black; /* Set the background color to black */
   color: white; /* Set text color to white */
   padding: 20px; /* Add some padding for better readability */
 `;
 
-export default TVdrama;
+const ButtonContainer = styled.div`
+  display: flex;
+  max-width: 800px;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-bottom: 30px; 
+`;
+
+const CategoryButton = styled.button`
+  margin: 5px;
+  cursor: pointer;
+  background-color: #ED174D; 
+  color: white;
+  border: none;
+  padding: 0.9em 1.3em;
+  border-radius: 20px; /* 조절 가능한 값 */
+`;

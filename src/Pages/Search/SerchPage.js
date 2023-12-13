@@ -47,10 +47,11 @@ const SearchComponent = () => {
         <InputLabel>
           <Input type="text" value={programName} onChange={handleProgramNameChange} />
           {programName === '' && <GuideText>영화 또는 TV프로그램명을 입력하세요.</GuideText>}
+          <SearchButton onClick={handleSearch}>검색</SearchButton>
         </InputLabel>
-        <SearchButton onClick={handleSearch}>검색</SearchButton>
         {programData && programData.length > 0 && (
         <SearchResult>
+          <SearchResultLabel>프로그램 검색 결과: {programName} </SearchResultLabel>
           <ProgramList>
             {programData.map((program, index) => (
               <ProgramItem key={index} onClick={() => openModal(program.image, program)}>
@@ -58,12 +59,12 @@ const SearchComponent = () => {
                       <HoverImage
                         src={program.image} 
                         alt={program.clean_asset_nm}
-                        style={{ width: '100%', objectFit:'contain'}} // , height: '100%'
+                        //style={{ width: '100%', objectFit:'cover'}} // , height: '100%'
                       />
                   ) : (
-                  <NoImageContainer>
-                    <NoImageText>No image</NoImageText>
-                  </NoImageContainer>
+                      <NoImageContainer>
+                        <NoImageText>No image</NoImageText>
+                      </NoImageContainer>
                   )}
                     <p>{program.clean_asset_nm}</p>
               </ProgramItem>
@@ -73,7 +74,7 @@ const SearchComponent = () => {
       )}
 
       {programData && programData.length === 0 && (
-        <p>검색 결과가 없습니다.</p>
+        <NoResultMessage>검색 결과가 없습니다.</NoResultMessage>
       )}
       <PopUp isOpen={!!selectedImage} onRequestClose={closeModal} imageUrl={selectedImage} program={selectedProgram} />
     </Container>
@@ -82,6 +83,7 @@ const SearchComponent = () => {
     </>
   );
 };
+
 
 const BlackContainer = styled.div`
   background-color: black;
@@ -100,32 +102,41 @@ const Container = styled.div`
 
 const InputLabel = styled.label`
   display: flex;
+  flex-direction: row; 
+  align-items: center;
   position: relative;
-  margin-top: 100px;
+  margin-top: 80px;
   margin-bottom: 20px;
-  width: 350px;
-  height: 50px;
+  width: 430px;
+  height: 55px;
   box-sizing: border-box;
+  border: 4px solid #ED174D;
+  border-radius: 25px; 
+  padding: 0px;
+  background-color: #ED174D;
 `;
 
 const Input = styled.input`
   flex: 1;
-  padding: 8px;
+  padding: 15px;
   font-size: 16px;
-  margin-top: 30px;
-  width: 300px;
-  margin-top: 10px;
-  margin-right: 10px;
-  width: 300px;
+  margin-top: 0px; /* 수정된 부분 */
+  width: calc(100% - 50px);
+  height: 100%;
+  margin-right: 0px;
   color: black;
   background-color: white;
+  border: none; 
+  box-sizing: border-box;
+  border-radius: 25px;
+  outline: none; 
 `;
 
 const GuideText = styled.span`
   font-size: 14px;
   color: gray;
   position: absolute;
-  top: 55%;
+  top: 50%;
   left: 12px;
   transform: translateY(-50%);
 `;
@@ -137,6 +148,18 @@ const SearchButton = styled.button`
   font-size: 18px;
   cursor: pointer;
   border: none;
+  width: 70px; 
+  height: 50px;
+  border-radius: 25px;
+  box-sizing: border-box;
+  margin-left: 0px;
+`;
+
+const SearchResultLabel = styled.p`
+  font-size: 24px;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 30px;
 `;
 
 const SearchResult = styled.div`
@@ -144,15 +167,21 @@ const SearchResult = styled.div`
   margin-top: 20px;
 `;
 
+const NoResultMessage = styled.p`
+  font-size: 20px;
+  color: white;
+  margin-top: 30px; 
+`;
+
 const ProgramList = styled.div`
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 20px;
+  margin-top: 50px;
+  flex-wrap: wrap; /* 여러 행으로 나누어질 수 있도록 설정 */
 `;
 
 const ProgramItem = styled.div`
-  flex: 0 0 calc(16.666% - 20px);
+  flex: 0 0 calc(16.999% - 20px);
   margin: 0 10px 20px;
   text-align: center;
   display: flex;
@@ -164,6 +193,7 @@ const ProgramItem = styled.div`
   img {
     width: 100%;
     height: auto;
+    object-fit: cover;
   }
 
   p {
@@ -182,6 +212,8 @@ const NoImageContainer = styled.div`
   height: 0;
   padding-bottom: 150%;
   box-sizing: border-box;
+  max-width: 100%; 
+  max-height: 100%; 
 `;
 
 const NoImageText = styled.div`
@@ -195,11 +227,12 @@ const NoImageText = styled.div`
 `;
 
 const HoverImage = styled.img`
-  max-width: 100%;
-  height: auto;
-  transition: transform 0.3s; /* 호버 효과를 위한 트랜지션 설정 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  transition: transform 0.3s; 
   &:hover {
-    transform: scale(1.1); /* 호버 시 이미지 확대 */
+    transform: scale(1.1); 
   }
 `;
 
