@@ -130,6 +130,7 @@ const MainPage = () => {
       });
   }, []);
 
+
   return (
     <div style={{ background: 'black', color: 'white', padding: '20px' }}>
       <h2>🦔 지금 시간대에 HOT한 프로그램이에요! 🦔</h2>

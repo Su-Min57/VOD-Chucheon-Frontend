@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import oc from 'open-color';
 import Modal from 'react-modal';
 import { FaHeart } from 'react-icons/fa';
 
