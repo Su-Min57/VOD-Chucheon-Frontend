@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from 'axios';
 import { useAuth } from '../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { LoginBox, LoginButton, LoginContent } from '.'; 
+import { LoginBox, LoginButton, LoginContent, Now } from '.'; 
 import Cookies from 'js-cookie';
 
 const LoginPage = () => {
@@ -47,8 +47,9 @@ const LoginPage = () => {
 
   return (
     <StyledLoginPage>
+      <Now/>
       <LoginBox>
-        <LoginContent title="환영합니다">
+        <LoginContent title="LG헬로비전에 오신 것을 환영합니다.">
             <Wrapper>
               <input type="text" placeholder="셋톱번호" value={subsr} onChange={(e) => setSubsr(e.target.value)} />
               <input type="password" placeholder="비밀번호" value={useIp} onChange={(e) => setUseIp(e.target.value)} />
@@ -57,7 +58,7 @@ const LoginPage = () => {
               로그인
             </LoginButton>
         </LoginContent>
-      </LoginBox>
+      </LoginBox>   
     </StyledLoginPage>
   );
 };
@@ -90,19 +91,3 @@ const Wrapper = styled.div`
 
 export default LoginPage;
 
-
-/*
-  return (
-    <div>
-      <h1>로그인</h1>
-      <label>Subsr: </label>
-      <input type="text" value={subsr} onChange={(e) => setSubsr(e.target.value)} />
-      <br />
-      <label>Use IP: </label>
-      <input type="password" value={useIp} onChange={(e) => setUseIp(e.target.value)} />
-      <br />
-      <button onClick={handleLogin}>로그인</button>
-    </div>
-  );
-};
-*/

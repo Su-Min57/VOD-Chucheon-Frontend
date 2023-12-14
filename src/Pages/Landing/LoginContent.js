@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import oc from "open-color";
+//import oc from "open-color";
 
 const LoginContent = ({title, children}) => (
     <Wrapper>
@@ -20,7 +20,7 @@ const Title = styled.div`
     text-align: left;
     font-size: 1.5rem;
     font-weight: bold;
-    color: ${oc.pink[8]};
+    color: #ed174d;
     margin-bottom: 1rem;
 `;
 

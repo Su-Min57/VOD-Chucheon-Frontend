@@ -6,8 +6,19 @@ import 'slick-carousel/slick/slick-theme.css';
 import { SwiperSlide } from 'swiper/react';
 
 // 이미지 폴더를 동적으로 불러오기
-const importAll = (r) => r.keys().map(r);
-const images = importAll(require.context('../../public/images/seasonmarket_images', false, /\.(jpg)$/));
+//const importAll = (r) => r.keys().map(r);
+//const images = importAll(require.context('../../public/images/seasonmarket_images', true, /\.(jpg)$/));
+
+const imageUrls = [
+  "https://seasonmarket.co.kr/public/static/images/image/link/202312/LINK_mainmodule_213_0_20231211133517200.jpg",
+  "https://seasonmarket.co.kr/public/static/images/image/link/202312/LINK_mainmodule_213_0_20231211173615634.jpg",
+  "https://seasonmarket.co.kr/public/static/images/image/link/202312/LINK_mainmodule_213_0_20231208160331937.jpg",
+  "https://seasonmarket.co.kr/public/static/images/image/link/202312/LINK_mainmodule_213_0_20231211083219990.jpg",
+  "https://seasonmarket.co.kr/public/static/images/image/link/202312/LINK_mainmodule_213_2_20231208160331964.jpg",
+  "https://seasonmarket.co.kr/public/static/images/image/link/202312/LINK_mainmodule_213_0_20231211083653151.jpg",
+  "https://seasonmarket.co.kr/public/static/images/image/link/202312/LINK_mainmodule_213_4_20231208160331987.jpg",
+  "https://seasonmarket.co.kr/public/static/images/image/link/202312/LINK_mainmodule_213_5_20231208160331998.png",
+];
 
 const ADBanner = () => {
   // react-slick 설정
@@ -23,12 +34,13 @@ const ADBanner = () => {
 
   return (
     <StyledSlider {...sliderSettings}>
-        {images.map((image, index) => (
+        {imageUrls.map((imageUrl, index) => (
             <SwiperSlide key={index} style={{ width: '30%', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 <a href="https://seasonmarket.co.kr/" target="_blank" rel="noopener noreferrer">
                     <ImageContainer>
-                        <Image src={image} alt={`Banner ${index + 1}`} />
+                        <Image src={imageUrl} alt={`Banner ${index + 1}`} />
                     </ImageContainer>
+                    {console.log(`Image ${index + 1} URL:`, imageUrl)}
                 </a>
             </SwiperSlide>
         ))}
