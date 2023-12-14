@@ -15,7 +15,7 @@ const LoginPage = () => {
   const handleLogin = async () => {
     console.log('Login button clicked');
     try {
-      const response = await axios.post('http://main.jinttoteam.com/api/login/', {
+      const response = await axios.post('https://main.jinttoteam.com/api/login/', {
         subsr: subsr,
         use_ip: useIp,
       });

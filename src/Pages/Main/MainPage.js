@@ -25,7 +25,7 @@ const MainPage = () => {
     };
 
     // Fetching data for Recommendations1
-    fetch('http://main.jinttoteam.com/api/main/recommendation_1/', {
+    fetch('https://main.jinttoteam.com/api/main/recommendation_1/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ const MainPage = () => {
       });
 
     // Fetching data for Recommendations2
-    fetch('http://main.jinttoteam.com/api/main/recommendation_2/', {
+    fetch('https://main.jinttoteam.com/api/main/recommendation_2/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ const MainPage = () => {
       });
 
           // Fetching data for Recommendations4
-    fetch('http://main.jinttoteam.com/api/main/recommendation_3/', {
+    fetch('https://main.jinttoteam.com/api/main/recommendation_3/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ const MainPage = () => {
 
 
         // Fetching data for Recommendations4
-    fetch('http://main.jinttoteam.com/api/main/recommendation_4/', {
+    fetch('https://main.jinttoteam.com/api/main/recommendation_4/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

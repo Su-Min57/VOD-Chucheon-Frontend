@@ -16,7 +16,7 @@ const SearchComponent = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.post('http://main.jinttoteam.com/api/main/search/', {
+      const response = await axios.post('https://main.jinttoteam.com/api/main/search/', {
         programName: programName,
       });
 
