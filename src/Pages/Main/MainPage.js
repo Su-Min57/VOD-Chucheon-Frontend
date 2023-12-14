@@ -133,7 +133,7 @@ const MainPage = () => {
 
   return (
     <div style={{ background: 'black', color: 'white', padding: '20px' }}>
-      <h2>🦔 지금 시간대에 HOT한 프로그램이에요! 🦔</h2>
+      <h2>🔥 지금 시간대에 HOT한 프로그램이에요! 🔥</h2>
       <div style={{ background: "rgba(169, 169, 169, 0.15)", padding: '10px', height: '500px'}}>
         {recommendations1.length > 0 ? (
           <Row data={recommendations1.slice(0, 20)} />
@@ -144,7 +144,7 @@ const MainPage = () => {
         )}
       </div>
 
-      <h2>🔥 가장 선호하는 장르 추천해드려요! 🔥</h2>
+      <h2>🦔 가장 선호하는 장르 추천해드려요! 🦔</h2>
       {recommendations2.length > 0 ? (
         <RowImage data={recommendations2.slice(0, 20)} />
       ) : (
@@ -171,6 +171,7 @@ const MainPage = () => {
         </div>
       )}
 
+      <h2>🍊🍋제철장터 광고🍇🍓</h2>
       <ADBanner />
 
     </div>

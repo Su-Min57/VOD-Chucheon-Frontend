@@ -60,8 +60,8 @@ const Weather = () => {
             <WeatherWrapper>
                 <TemperText>{(weatherData.temp - 273.15).toFixed(0)}°</TemperText>
                 <WeatherImg
-                    src={`https://openweathermap.org/img/w/${weatherData.icon}.png`}
-                    alt="Weather Icon"
+                  src={`https://openweathermap.org/img/w/${weatherData.icon}.png`}
+                  alt="Weather Icon"
                 />
             </WeatherWrapper>
             <DateText>{getCurrentDate()}</DateText>
