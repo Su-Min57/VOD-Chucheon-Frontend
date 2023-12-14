@@ -1,6 +1,6 @@
 import React from "react";
 import styled from  'styled-components';
-import oc from "open-color";
+//import oc from "open-color";
 import { Link } from "react-router-dom";
 
 const LoginBox = ({children}) => (
@@ -22,6 +22,7 @@ const Positioner = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    zIndex: 9999;
 `;
 
 //너비, 그림자 설정
@@ -33,7 +34,7 @@ const ShadowedBox = styled.div`
 
 //로고
 const LogoWrapper = styled.div`
-    background: ${oc.white[0]};
+    background: white;
     height: 5rem;
     display: flex;
     align-items: center;
@@ -42,7 +43,7 @@ const LogoWrapper = styled.div`
 `;
 
 const Logo = styled(Link)`
-    color: ${oc.pink[8]};
+    color: #ed174d;
     font-family: 'Roboto';
     font-size: 2.4rem;
     font-weight: bold;
