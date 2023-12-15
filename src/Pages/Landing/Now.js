@@ -37,6 +37,7 @@ const Now = () => {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 1500,
+        arrows: false,
   };
 
     return (
@@ -46,7 +47,7 @@ const Now = () => {
                 <Description1>#정주행 #집콕생활</Description1>
                 <Description2>헬로 Pick 추천 콘텐츠</Description2>
                 <MoreButton href="https://www.lghellovision.net/main.do" target="_blank" rel="noopener noreferrer">  
-                    헬로tv 더 알아보기 →
+                    헬로tv 더 알아보기 👉
                 </MoreButton>
             </DescriptionBox>
             <StyledSlider {...sliderSettings}> 
@@ -87,23 +88,29 @@ const DescriptionBox = styled.div`
   align-items: flex-start;
   min-width: 4px;
   width: 480px;
-  margin-left: 5%;
+  margin-left: 3%;
 `;
 
 const Description1 = styled.p`
-  font-size: 2rem;
+  font-size: 2.3rem;
+  margin-top: 15px;
+  color: white;
 `;
 
 const Description2 = styled.p`
-  font-size: 2rem;
+  font-size: 2.3rem;
   font-weight: bold;
+  margin-top: -40px;
+  margin-bottom: 10px;
+  color: white;
 `;
 
 const MoreButton = styled.a`
+  margin-top: 20px;
   padding: 8px 10px;
   font-size: 16px;
-  background-color: white;
-  color: #ed174d;
+  background-color: #ed174d;
+  color: white;
   border: 2px solid #ed174d;
   border-radius: 25px;
   cursor: pointer;
@@ -118,8 +125,8 @@ const ImageBox = styled.div`
     
     img {
     max-width: 100%;
-    width: 220px;
-    height: 300px;
+    width: 230px;
+    height: 305px;
     }
 `;
 

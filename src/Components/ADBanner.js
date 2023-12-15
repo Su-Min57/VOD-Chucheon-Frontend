@@ -4,10 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { SwiperSlide } from 'swiper/react';
-
-// 이미지 폴더를 동적으로 불러오기
-//const importAll = (r) => r.keys().map(r);
-//const images = importAll(require.context('../../public/images/seasonmarket_images', true, /\.(jpg)$/));
+import { Link } from 'react-router-dom';
 
 const imageUrls = [
   "https://seasonmarket.co.kr/public/static/images/image/link/202312/LINK_mainmodule_213_0_20231211133517200.jpg",
@@ -36,12 +33,12 @@ const ADBanner = () => {
     <StyledSlider {...sliderSettings}>
         {imageUrls.map((imageUrl, index) => (
             <SwiperSlide key={index} style={{ width: '30%', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                <a href="https://seasonmarket.co.kr/" target="_blank" rel="noopener noreferrer">
+                <Link to="https://seasonmarket.co.kr/" target="_blank" rel="noopener noreferrer">
                     <ImageContainer>
                         <Image src={imageUrl} alt={`Banner ${index + 1}`} />
                     </ImageContainer>
-                    {console.log(`Image ${index + 1} URL:`, imageUrl)}
-                </a>
+                    {console.log("광고 이미지 불러옴")}
+                </Link>
             </SwiperSlide>
         ))}
     </StyledSlider>

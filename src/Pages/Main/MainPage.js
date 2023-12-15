@@ -49,7 +49,8 @@ const MainPage = () => {
       .catch(error => {
         console.error('Error fetching data for Recommendations1:', error);
       });
-
+     
+    // http://localhost:8000/  
     // Fetching data for Recommendations2
     fetch('https://main.jinttoteam.com/api/main/recommendation_2/', {
       method: 'POST',

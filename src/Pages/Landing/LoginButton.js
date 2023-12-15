@@ -10,12 +10,12 @@ const LoginButton = ({children, onClick}) => (
 );
 
 const Wrapper = styled.div`
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    width: 300px;
+    margin-top: -1rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    width: 400px;
 
-    background: #ed174d;
+    background: #181818;
     color: white;
 
     text-align: center;
@@ -27,7 +27,7 @@ const Wrapper = styled.div`
     transition: .2s all;
 
     &:hover {
-        background: pink;
+        background: rgba(50, 50, 50, 0.9);
         ${shadow(0)}
     }
 

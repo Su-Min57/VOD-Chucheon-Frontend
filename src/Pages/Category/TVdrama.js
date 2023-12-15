@@ -18,7 +18,7 @@ const TVdrama = () => {
     axios.post('https://main.jinttoteam.com/api/main/process_button_click/', postData)
       .then(response => {
         setData(response.data.data);
-        console.log(response.data.data)
+        console.log(response.data.data) //내머리 대머리
       })
       .catch(error => {
         console.error('Error fetching data:', error);
