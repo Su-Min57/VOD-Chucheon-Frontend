@@ -1,13 +1,10 @@
-//Header 전체 전환 페이지들을 하나로 묶어서 
-//Root.js로 가져가는 페이지
-
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import HeaderCategory from "./HeaderCategory";
 import HeaderPlus from "./HeaderPlus";
 
 const Header = () => {
-  const [isScroll, setIsScroll] = useState(false);
+  const [isscroll, setIsScroll] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +23,7 @@ const Header = () => {
 
   return (
     <>
-      <HeaderNormalLayout isScroll={isScroll}>
+      <HeaderNormalLayout isscroll={isscroll ? "true" : "false"}>
         <HeaderLayout>
           <HeaderCategory />
           <HeaderPlus />
@@ -38,9 +35,9 @@ const Header = () => {
 
 const HeaderNormalLayout = styled.div`
   top: 0;
-  position: ${props => (props.isScroll ? "sticky" : "relative")};
+  position: ${props => (props.isscroll === "true" ? "sticky" : "relative")};
   width: 100%;
-  background: ${props => (props.isScroll ? "rgb(15, 15, 15)" : "transparent")};
+  background: ${props => (props.isscroll === "true" ? "rgb(15, 15, 15)" : "transparent")};
   z-index: 999;
   background-color: #181818;
 `;

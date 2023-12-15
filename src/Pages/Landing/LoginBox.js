@@ -16,9 +16,11 @@ const LoginBox = ({children}) => (
     </Positioner>
 );
 
-//화면 중앙에 위치시키기
+//화면 중앙에 위치시키기, 로그인 박스 전체
 const Positioner = styled.div`
     position: absolute;
+    width: 470px;
+    height: 500px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -35,17 +37,19 @@ const ShadowedBox = styled.div`
 //로고
 const LogoWrapper = styled.div`
     background: white;
-    height: 5rem;
+    height: 6rem;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 30px;
+    background: #ed174d;
 `;
 
 const Logo = styled(Link)`
-    color: #ed174d;
+    color: white;
     font-family: 'Roboto';
-    font-size: 2.4rem;
+    font-size: 2.6rem;
+    margin-top: -5px;
     font-weight: bold;
     letter-spacing: 2px;
     text-decoration: none;
@@ -58,7 +62,6 @@ const Contents = styled.div`
     text-align: center;
     background: white;
     padding: 2rem;
-    height: auto;
 `;
 
 export default LoginBox;

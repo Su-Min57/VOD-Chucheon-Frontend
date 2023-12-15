@@ -59,10 +59,14 @@ const Weather = () => {
         <Wrapper>
             <WeatherWrapper>
                 <TemperText>{(weatherData.temp - 273.15).toFixed(0)}°</TemperText>
+                {weatherData.icon ? (
                 <WeatherImg
                   src={`https://openweathermap.org/img/w/${weatherData.icon}.png`}
                   alt="Weather Icon"
                 />
+                ) : (
+                  <DefaultImage src="default-icon.png" alt="Default Icon" />
+                )}
             </WeatherWrapper>
             <DateText>{getCurrentDate()}</DateText>
       </Wrapper>
@@ -102,6 +106,11 @@ const TemperText = styled.span`
 
 const WeatherImg = styled.img`
   width: 60px; /* 이미지 크기 조절 */
+`;
+
+const DefaultImage = styled.img`
+  width: 60px; 
+  height: 60px;
 `;
 
 export default Weather;
