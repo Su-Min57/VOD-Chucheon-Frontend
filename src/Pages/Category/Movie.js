@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-scroll'; // Import Link from react-scroll
 import styled from 'styled-components'; // Import styled-components
 import RowImage from '../../Components/RowImage';
+import Loading from '../../Components/Loading';
 
 const Movie = () => {
   const [data, setData] = useState([]);
@@ -15,7 +16,7 @@ const Movie = () => {
       button_text: '영화',
     };
 
-    axios.post('https://main.jinttoteam.com/api/main/process_button_click/', postData)
+    axios.post('http://localhost:8000/api/main/process_button_click/', postData)
       .then(response => {
         setData(response.data.data);
         console.log(response.data.data)
@@ -27,8 +28,9 @@ const Movie = () => {
 
   const movieRef = useRef(null);
 
+//<div>Loading...</div>;
   if (data.length === 0) {
-    return <div>Loading...</div>;
+    return <Loading />
   }
 
   const uniqueCleanAssetNames = new Set();
@@ -103,6 +105,3 @@ const CategoryButton = styled.button`
   padding: 0.9em 1.3em;
   border-radius: 20px; /* 조절 가능한 값 */
 `;
-
-
-
