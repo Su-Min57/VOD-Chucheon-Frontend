@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState,  useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import PopUp from '../../Components/Modal/Modal';
 
 const SearchComponent = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [programName, setProgramName] = useState('');
   const [programData, setProgramData] = useState(null);
   const [selectedImage, setSelectedImage] = useState('');
   const [selectedProgram, setSelectedProgram] = useState('');
 
+  useEffect(() => {
+    if (data.length > 0) {
+      const uniquePrograms = Array.from(new Set(data.map(program => program.image + program.clean_asset_nm)))
+        .map(uniqueKey => data.find(program => uniqueKey === program.image + program.clean_asset_nm));
+
+      setProgramData(uniquePrograms);
+    }
+  }, [data]);
 
   const handleProgramNameChange = (e) => {
     setProgramName(e.target.value);
@@ -16,24 +26,31 @@ const SearchComponent = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.post('https://main.jinttoteam.com/api/main/search/', {
+      setLoading(true);
+
+      const response = await axios.post('http://localhost:8000/api/main/search/', {
         programName: programName,
       });
 
-      const uniquePrograms = Array.from(new Set(response.data.data.map(program => program.image + program.clean_asset_nm)))
-        .map(uniqueKey => response.data.data.find(program => uniqueKey === program.image + program.clean_asset_nm));
-
-      setProgramData(uniquePrograms);
-      console.log(uniquePrograms);
+      if (response.data && typeof response.data === 'string') {
+        const cleanedData = response.data.replace(/: NaN,/g, ': null,');
+        const parsedData = JSON.parse(cleanedData);
+        setData(parsedData.data);
+        console.log(parsedData.data);
+      } else {
+        setData(response.data.data);
+        console.log(response.data.data);
+      }
     } catch (error) {
       console.error('프로그램 데이터를 불러오는 중 오류 발생:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  //PopUp.js에서 사용할 data를 prop형태로 보내기 위한 구문
   const openModal = (image, program) => {
     setSelectedImage(image);
-    setSelectedProgram(program)
+    setSelectedProgram(program);
   };
 
   const closeModal = () => {
@@ -59,7 +76,7 @@ const SearchComponent = () => {
                       <HoverImage
                         src={program.image} 
                         alt={program.clean_asset_nm}
-                        //style={{ width: '100%', objectFit:'cover'}} // , height: '100%'
+                        style={{ width: '100%', objectFit:'cover'}} // , height: '100%'
                       />
                   ) : (
                       <NoImageContainer>

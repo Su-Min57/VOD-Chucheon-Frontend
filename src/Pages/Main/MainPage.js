@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import Row from '../../Components/Row';
 import RowImage from '../../Components/RowImage';
 import ADBanner from '../../Components/ADBanner';
+import Loading from '../../Components/Loading';
 
 const MainPage = () => {
   const [recommendations1, setRecommendations1] = useState([]);
@@ -25,7 +26,7 @@ const MainPage = () => {
     };
 
     // Fetching data for Recommendations1
-    fetch('https://main.jinttoteam.com/api/main/recommendation_1/', {
+    fetch('http://localhost:8000/api/main/recommendation_1/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +53,7 @@ const MainPage = () => {
      
     // http://localhost:8000/  
     // Fetching data for Recommendations2
-    fetch('https://main.jinttoteam.com/api/main/recommendation_2/', {
+    fetch('http://localhost:8000/api/main/recommendation_2/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -78,7 +79,7 @@ const MainPage = () => {
       });
 
           // Fetching data for Recommendations4
-    fetch('https://main.jinttoteam.com/api/main/recommendation_3/', {
+    fetch('http://localhost:8000/api/main/recommendation_3/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -105,7 +106,7 @@ const MainPage = () => {
 
 
         // Fetching data for Recommendations4
-    fetch('https://main.jinttoteam.com/api/main/recommendation_4/', {
+    fetch('http://localhost:8000/api/main/recommendation_4/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -131,6 +132,9 @@ const MainPage = () => {
       });
   }, []);
 
+  if (recommendations1.length === 0) {
+    return <Loading />
+  }
 
   return (
     <div style={{ background: 'black', color: 'white', padding: '20px' }}>
@@ -144,7 +148,7 @@ const MainPage = () => {
           </div>
         )}
       </div>
-
+      
       <h2>🦔 가장 선호하는 장르 추천해드려요! 🦔</h2>
       {recommendations2.length > 0 ? (
         <RowImage data={recommendations2.slice(0, 20)} />
@@ -180,10 +184,3 @@ const MainPage = () => {
 };
 
 export default MainPage;
-
-
-
-
-
-
-

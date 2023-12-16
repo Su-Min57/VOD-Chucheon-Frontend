@@ -32,12 +32,13 @@ const ADBanner = () => {
   return (
     <StyledSlider {...sliderSettings}>
         {imageUrls.map((imageUrl, index) => (
-            <SwiperSlide key={index} style={{ width: '30%', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <SwiperSlide key={index} style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 <Link to="https://seasonmarket.co.kr/" target="_blank" rel="noopener noreferrer">
                     <ImageContainer>
-                        <Image src={imageUrl} alt={`Banner ${index + 1}`} />
+                        <img src={
+                          imageUrl} alt={`Banner ${index + 1}`} width="100%"/>
                     </ImageContainer>
-                    {console.log("광고 이미지 불러옴")}
+                    {console.log("Success Bring Img:" ,`${index + 1}`)}
                 </Link>
             </SwiperSlide>
         ))}
@@ -61,11 +62,6 @@ const ImageContainer = styled.div`
     height: auto;
     margin: 0%;
   }
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: auto;
 `;
 
 export default ADBanner;

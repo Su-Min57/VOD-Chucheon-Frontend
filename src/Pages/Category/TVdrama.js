@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-scroll'; // Import Link from react-scroll
 import styled from 'styled-components'; // Import styled-components
 import RowImage from '../../Components/RowImage';
+import Loading from '../../Components/Loading';
 
 const TVdrama = () => {
   const [data, setData] = useState([]);
@@ -15,7 +16,7 @@ const TVdrama = () => {
       button_text: 'TV드라마',
     };
 
-    axios.post('https://main.jinttoteam.com/api/main/process_button_click/', postData)
+    axios.post('http://localhost:8000/api/main/process_button_click/', postData)
       .then(response => {
         setData(response.data.data);
         console.log(response.data.data) //내머리 대머리
@@ -28,7 +29,7 @@ const TVdrama = () => {
   const tvdramaRef = useRef(null);
 
   if (data.length === 0) {
-    return <div>Loading...</div>;
+    return <Loading />
   }
 
   const uniqueCleanAssetNames = new Set();

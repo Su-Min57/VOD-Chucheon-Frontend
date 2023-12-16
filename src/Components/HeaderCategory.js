@@ -26,7 +26,7 @@ const HeaderCategory = () => {
         TV 드라마
       </CategoryList>
       <CategoryList active={pathname === '/Category/tvshow' ? 'true' : 'false'} onClick={() => changePage("/Category/tvshow")}>
-        TV방송
+        방송
       </CategoryList>
       <CategoryList active={pathname === '/Category/movie' ? 'true' : 'false'} onClick={() => changePage("/Category/movie")}>
         영화
@@ -34,9 +34,10 @@ const HeaderCategory = () => {
       <CategoryList active={pathname === '/search' ? 'true' : 'false'} onClick={() => changePage("/search")}>
         검색
       </CategoryList>
+      {/*
       <WeatherContainer>
         <Weather />
-      </WeatherContainer>
+      </WeatherContainer> */}
     </Wrapper>
   );
 };
@@ -71,6 +72,7 @@ const CategoryList = styled.li`
   font-size: 20px;
   margin: 0px 20px 5px 60px;
   position: relative;
+  cursor: pointer;
 
   &:after {
     content: '';
