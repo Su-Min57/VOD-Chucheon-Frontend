@@ -30,7 +30,8 @@ const MainPage = () => {
       subsr: subsr,
       hashtag: hashtagValue, 
     };
-
+    alert('postData before request: ' + JSON.stringify(postData));
+    alert(JSON.stringify(postData[hashtag]))
     // Fetching data for Recommendations1
     fetch('https://main.jinttoteam.com/api/main/recommendation_1/', {
       method: 'POST',
