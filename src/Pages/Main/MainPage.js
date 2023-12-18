@@ -32,10 +32,11 @@ const MainPage = () => {
     };
 
     // Fetching data for Recommendations1
-    fetch('https://main.jinttoteam.com/api/main/recommendation_1/', {
+    fetch('https://main.jinttoteam.com/api/main/recommendation_1/?nocache=${Date.now()}', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache', // 캐시 방지
       },
       body: JSON.stringify(postData),
       credentials: 'include',
