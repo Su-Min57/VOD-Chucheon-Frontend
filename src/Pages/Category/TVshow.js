@@ -17,7 +17,7 @@ const TVshow = () => {
       button_text: 'TV방송',
     };
 
-    axios.post('http://localhost:8000/api/main/process_button_click/', postData)
+    axios.post('https://main.jinttoteam.com/api/main/process_button_click/', postData)
       .then(response => {
         setData(response.data.data);
         console.log(response.data.data)
@@ -31,7 +31,7 @@ const TVshow = () => {
   const tvshowRef = useRef(null);
 
   if (data.length === 0) {
-    return <Loading />
+    return <Loading />;
   }
 
   const uniqueCleanAssetNames = new Set();

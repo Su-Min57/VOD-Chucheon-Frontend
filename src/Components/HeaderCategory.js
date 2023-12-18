@@ -19,25 +19,24 @@ const HeaderCategory = () => {
           <LogoImg src="/images/LG_logo.png" />
         </LogoLink>
       </Logo>
-      <CategoryList active={pathname === '/main' ? 'true' : 'false'} onClick={() => changePage("/main")}>
+      <CategoryList active={pathname === '/main'} onClick={() => changePage("/main")}>
         홈
       </CategoryList>
-      <CategoryList active={pathname === '/Category/tvdrama' ? 'true' : 'false'} onClick={() => changePage("/Category/tvdrama")}>
+      <CategoryList active={pathname === '/Category/tvdrama'} onClick={() => changePage("/Category/tvdrama")}>
         TV 드라마
       </CategoryList>
-      <CategoryList active={pathname === '/Category/tvshow' ? 'true' : 'false'} onClick={() => changePage("/Category/tvshow")}>
-        방송
+      <CategoryList active={pathname === '/Category/tvshow'} onClick={() => changePage("/Category/tvshow")}>
+        TV방송
       </CategoryList>
-      <CategoryList active={pathname === '/Category/movie' ? 'true' : 'false'} onClick={() => changePage("/Category/movie")}>
+      <CategoryList active={pathname === '/Category/movie'} onClick={() => changePage("/Category/movie")}>
         영화
       </CategoryList>
-      <CategoryList active={pathname === '/search' ? 'true' : 'false'} onClick={() => changePage("/search")}>
+      <CategoryList active={pathname === '/search'} onClick={() => changePage("/search")}>
         검색
       </CategoryList>
-      {/*
       <WeatherContainer>
         <Weather />
-      </WeatherContainer> */}
+      </WeatherContainer>
     </Wrapper>
   );
 };
@@ -68,11 +67,10 @@ const LogoImg = styled.img`
 `;
 
 const CategoryList = styled.li`
-  color: ${props => (props.active === 'true' ? '#ED174D' : 'white')};
+  color: ${props => (props.active ? '#ED174D' : 'white')};
   font-size: 20px;
   margin: 0px 20px 5px 60px;
   position: relative;
-  cursor: pointer;
 
   &:after {
     content: '';
@@ -80,7 +78,7 @@ const CategoryList = styled.li`
     position: absolute;
     width: 100%;
     height: 2px;
-    background-color: ${props => (props.active === 'true' ? '#ED174D' : 'transparent')};
+    background-color: ${props => (props.active ? '#ED174D' : 'transparent')};
     bottom: 0;
     left: 0;
     transition: background-color 0.3s ease;

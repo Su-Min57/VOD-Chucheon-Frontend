@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { SwiperSlide } from 'swiper/react';
-import { Link } from 'react-router-dom';
 
 const imageUrls = [
   "https://seasonmarket.co.kr/public/static/images/image/link/202312/LINK_mainmodule_213_0_20231211133517200.jpg",
@@ -18,49 +17,75 @@ const imageUrls = [
 ];
 
 const ADBanner = () => {
-  // react-slick 설정
-  const sliderSettings = {
+  const sliderRef = useRef(null);
+
+  const settings = {
     dots: true,
     infinite: true,
-    speed: 1000,
+    speed: 500,
     slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2500,
+    arrows: false,
   };
 
+  useEffect(() => {
+    // Resize slick track on window resize
+    const handleResize = () => {
+      if (sliderRef.current) {
+        sliderRef.current.slickGoTo(0);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
-    <StyledSlider {...sliderSettings}>
-        {imageUrls.map((imageUrl, index) => (
-            <SwiperSlide key={index} style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                <Link to="https://seasonmarket.co.kr/" target="_blank" rel="noopener noreferrer">
-                    <ImageContainer>
-                        <img src={
-                          imageUrl} alt={`Banner ${index + 1}`} width="100%"/>
-                    </ImageContainer>
-                    {console.log("Success Bring Img:" ,`${index + 1}`)}
-                </Link>
-            </SwiperSlide>
-        ))}
+    <StyledSlider {...settings} ref={sliderRef}>
+      {imageUrls.map((imageUrl, index) => (
+        <SwiperSlide key={index}>
+          <a href="https://seasonmarket.co.kr/" target="_blank" rel="noopener noreferrer">
+            <ImageContainer>
+              <Image src={imageUrl} alt={`Banner ${index + 1}`} />
+            </ImageContainer>
+          </a>
+        </SwiperSlide>
+      ))}
     </StyledSlider>
   );
 };
 
 const StyledSlider = styled(Slider)`
-  display: flex;
-  flex-direction: center;
-  height: 400px;
+  .slick-list {
+    overflow: hidden;
+  }
+`;
+
+const Image = styled.img`
+  position: absolute;
+  width: 100%;
+  height: 150%;
+  object-fit: cover;
 `;
 
 const ImageContainer = styled.div`
   width: 100%;
-  height: 100%;
-  text-align: center;
-  align-items: center;
+  padding-top: 5%; /* 1:1 Aspect Ratio */
+  padding-bottom: 25%;
+  position: relative;
+
   img {
-    max-width: 100%;
-    height: auto;
-    margin: 0%;
+    position: absolute;
+    top: 10;
+    left: 0;
+    width: 100%;
+    height: auto%;
+    object-fit: cover;
   }
 `;
 

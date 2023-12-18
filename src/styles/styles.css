@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+    background-color: black; /* 배경색을 검정색으로 설정 */
+    color: white; /* 글자 색을 흰색으로 설정 (필요에 따라 조절) */
+  }
+  
+  .page-container {
+    max-width: 1270px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }

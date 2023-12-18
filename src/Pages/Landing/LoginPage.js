@@ -16,13 +16,17 @@ const LoginPage = () => {
   const handleLogin = async () => {
     console.log('Login button clicked');
     try {
-      const response = await axios.post('http://localhost:8000/api/login/', {
+      const response = await axios.post('https://main.jinttoteam.com/api/login/', {
         subsr: subsr,
         use_ip: useIp,
       });
       
       if (response && response.data) {
         const { access, refresh } = response.data;
+
+        if (rememberSetTopBox) {
+          localStorage.setItem('subsr', subsr);
+        }
 
         // 쿠키에 토큰 저장
         Cookies.set('access_token', access);
@@ -51,7 +55,7 @@ const LoginPage = () => {
       <Now/>
       <LoginBox>
         <LoginContent title="Login">
-        <CenteredText>로그인 후 이용 부탁드립니다.</CenteredText>
+          <CenteredText>로그인 후 이용 부탁드립니다.</CenteredText>
             <Wrapper>
               <input type="text" placeholder="셋톱번호" value={subsr} onChange={(e) => setSubsr(e.target.value)} />
               <input type="password" placeholder="비밀번호" value={useIp} onChange={(e) => setUseIp(e.target.value)} />
@@ -62,7 +66,7 @@ const LoginPage = () => {
                 onChange={() => setRememberSetTopBox(!rememberSetTopBox)}
               />
               <span>아이디 저장</span>
-              </RememberCheckbox>
+            </RememberCheckbox>
             </Wrapper>
             <LoginButton onClick={handleLogin}>
               로그인

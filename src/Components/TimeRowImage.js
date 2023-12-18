@@ -41,24 +41,22 @@ const RowImage = ({ data }) => {
         <div className="swiper-scrollbar" style={{ display: 'none' }} />
         
         {uniqueData.map((program, index) => (
-          <SwiperSlide key={index}>
-            <ImageContainer onClick={() => openModal(program.image, program)}>
-              {program.image ? (
-                <HoverImage 
-                  src={program.image}
-                  alt={program.clean_asset_nm}
-                  style={{ width: '100%', height: '100%', objectFit:'contain'}}
-                />
-              ) : (
-                <NoImageContainer>
-                  <NoImageText>No Image</NoImageText>
-                </NoImageContainer>
-              )}
-              <p>{program.clean_asset_nm}</p>
-            </ImageContainer>
-          </SwiperSlide>
-        ))}
-      </StyledSwiper>
+            <SwiperSlide key={index}>
+                {program.image && (
+                <ImageContainer onClick={() => openModal(program.image, program)}>
+                    <div>
+                    <HoverImage 
+                        src={program.image}
+                        alt={program.clean_asset_nm}
+                        style={{ width: '100%', height: '100%', objectFit: 'contain'}}
+                    />
+                    <p>{program.clean_asset_nm}</p>
+                    </div>
+                </ImageContainer>
+                )}
+            </SwiperSlide>
+            ))}
+        </StyledSwiper>
       <PopUp isOpen={!!selectedImage} onRequestClose={closeModal} imageUrl={selectedImage} program={selectedProgram} />
     </>
   );
@@ -66,6 +64,7 @@ const RowImage = ({ data }) => {
 
 
 const StyledSwiper = styled(Swiper)`
+   max-height: 100%;
   .swiper-button-prev,
   .swiper-button-next {
     background-color: black;
@@ -107,6 +106,7 @@ const ImageContainer = styled.div`
   text-align: center;
   img {
     max-width: 100%;
+    max-height: 100%;
     height: auto;
   }
 `;

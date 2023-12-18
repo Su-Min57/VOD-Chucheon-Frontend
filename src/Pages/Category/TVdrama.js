@@ -16,10 +16,10 @@ const TVdrama = () => {
       button_text: 'TV드라마',
     };
 
-    axios.post('http://localhost:8000/api/main/process_button_click/', postData)
+    axios.post('https://main.jinttoteam.com/api/main/process_button_click/', postData)
       .then(response => {
         setData(response.data.data);
-        console.log(response.data.data) //내머리 대머리
+        console.log(response.data.data)
       })
       .catch(error => {
         console.error('Error fetching data:', error);

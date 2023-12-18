@@ -28,7 +28,7 @@ const SearchComponent = () => {
     try {
       setLoading(true);
 
-      const response = await axios.post('http://localhost:8000/api/main/search/', {
+      const response = await axios.post('https://main.jinttoteam.com/api/main/search/', {
         programName: programName,
       });
 
