@@ -41,12 +41,14 @@ const MainPage = () => {
       credentials: 'include',
     })
       .then(response => {
+        console.log('Response received:!!!!', response); // 응답 로깅
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         return response.json();
       })
       .then(data => {
+        console.log('Data received:', data);
         if (data?.data) {
           setRecommendations1(data.data);
         } else {
