@@ -36,9 +36,6 @@ const MainPage = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache, no-store, must-revalidate', // 캐시 방지 헤더 추가
-        'Pragma': 'no-cache', // HTTP 1.0 호환성을 위해 추가
-        'Expires': '0' // 과거 날짜로 설정하여 캐시 만료
       },
       body: JSON.stringify(postData),
       credentials: 'include',
@@ -99,9 +96,6 @@ const MainPage = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache, no-store, must-revalidate', // 캐시 방지 헤더 추가
-        'Pragma': 'no-cache', // HTTP 1.0 호환성을 위해 추가
-        'Expires': '0' // 과거 날짜로 설정하여 캐시 만료
       },
       body: JSON.stringify(postData),
       credentials: 'include',
@@ -128,9 +122,6 @@ const MainPage = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache, no-store, must-revalidate', // 캐시 방지 헤더 추가
-        'Pragma': 'no-cache', // HTTP 1.0 호환성을 위해 추가
-        'Expires': '0' // 과거 날짜로 설정하여 캐시 만료
       },
       body: JSON.stringify(postData),
       credentials: 'include',
@@ -158,9 +149,6 @@ const MainPage = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache, no-store, must-revalidate', // 캐시 방지 헤더 추가
-        'Pragma': 'no-cache', // HTTP 1.0 호환성을 위해 추가
-        'Expires': '0' // 과거 날짜로 설정하여 캐시 만료
       },
       body: JSON.stringify(postData),
       credentials: 'include',
