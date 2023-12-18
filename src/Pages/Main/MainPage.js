@@ -32,7 +32,7 @@ const MainPage = () => {
     };
 
     // Fetching data for Recommendations1
-    fetch('https://main.jinttoteam.com/api/main/recommendation_1/?nocache=${Date.now()}', {
+    fetch(`https://main.jinttoteam.com/api/main/recommendation_1/?nocache=${Date.now()}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
