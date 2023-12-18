@@ -5,7 +5,6 @@ import PopUp from '../../Components/Modal/Modal';
 
 const SearchComponent = () => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [programName, setProgramName] = useState('');
   const [programData, setProgramData] = useState(null);
   const [selectedImage, setSelectedImage] = useState('');
@@ -26,7 +25,6 @@ const SearchComponent = () => {
 
   const handleSearch = async () => {
     try {
-      setLoading(true);
 
       const response = await axios.post('https://main.jinttoteam.com/api/main/search/', {
         programName: programName,
@@ -44,7 +42,6 @@ const SearchComponent = () => {
     } catch (error) {
       console.error('프로그램 데이터를 불러오는 중 오류 발생:', error);
     } finally {
-      setLoading(false);
     }
   };
 
@@ -60,35 +57,35 @@ const SearchComponent = () => {
 
   return (
     <>
-    <Container>
+      <Container>
         <InputLabel>
           <Input type="text" value={programName} onChange={handleProgramNameChange} />
           {programName === '' && <GuideText>영화 또는 TV프로그램명을 입력하세요.</GuideText>}
           <SearchButton onClick={handleSearch}>검색</SearchButton>
         </InputLabel>
         {programData && programData.length > 0 && (
-        <SearchResult>
-          <SearchResultLabel>프로그램 검색 결과: {programName} </SearchResultLabel>
-          <ProgramList>
-            {programData.map((program, index) => (
-              <ProgramItem key={index} onClick={() => openModal(program.image, program)}>
-                  {program.image ? ( 
-                      <HoverImage
-                        src={program.image} 
-                        alt={program.clean_asset_nm}
-                        style={{ width: '100%', objectFit:'cover'}} // , height: '100%'
-                      />
+          <SearchResult>
+            <SearchResultLabel>프로그램 검색 결과: {programName} </SearchResultLabel>
+            <ProgramList>
+              {programData.map((program, index) => (
+                <ProgramItem key={index} onClick={() => openModal(program.image, program)}>
+                  {program.image ? (
+                    <HoverImage
+                      src={program.image}
+                      alt={program.clean_asset_nm}
+                      style={{ width: '100%', objectFit: 'cover' }}
+                    />
                   ) : (
-                      <NoImageContainer>
-                        <NoImageText>No image</NoImageText>
-                      </NoImageContainer>
+                    <NoImageContainer>
+                      <NoImageText>No image</NoImageText>
+                    </NoImageContainer>
                   )}
-                    <p>{program.clean_asset_nm}</p>
-              </ProgramItem>
-            ))}
-          </ProgramList>
-        </SearchResult>
-      )}
+                  <p>{program.clean_asset_nm}</p>
+                </ProgramItem>
+              ))}
+            </ProgramList>
+          </SearchResult>
+        )}
 
       {programData && programData.length === 0 && (
         <NoResultMessage>검색 결과가 없습니다.</NoResultMessage>
@@ -100,6 +97,8 @@ const SearchComponent = () => {
     </>
   );
 };
+
+
 
 
 const BlackContainer = styled.div`
