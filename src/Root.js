@@ -14,13 +14,21 @@ import Header from './Components/Header';
 import TVshow from './Pages/Category/TVshow';
 import TVdrama from './Pages/Category/TVdrama';
 import Movie from './Pages/Category/Movie';
+import './styles/styles.css';
+import TopButton from './Components/TopButton';
+
 
 const MainLayout = () => {
   return (
     <>
+
       <Header />
+    <div className="page-container">
       <Outlet />
+    </div>
       <Footer />
+      <TopButton />
+    
     </>
   );
 };

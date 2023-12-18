@@ -5,7 +5,7 @@ import styled from "styled-components";
 const LoginContent = ({title, children}) => (
     <Wrapper>
         <Title>{title}</Title>
-        <Underline />
+        <Underline /> {/* New component for the thin pink line */}
         {children}
     </Wrapper>
 );
@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   justify-content: center; /* 수평 중앙 정렬 */
 `;
 
-// "LG헬로비전에 오신 것을 환영합니다." Title
+// LG헬로비전에 오신 것을 환영합니다.
 const Title = styled.div`
     text-align: left;
     font-size: 2rem;

@@ -5,8 +5,8 @@ import { MoonLoader } from "react-spinners";
 const Loading = () => {
     return (
         <LoadingContainer>
-            <LoadingText>잠시만 기다려주세요.</LoadingText>
-            <MoonLoader color="#ed174d" size={100} />
+            <LoadingText>잠시만 기다려주세요</LoadingText>
+            <MoonLoader color="#ed174d" size={50} />
         </LoadingContainer>
     );
 };
@@ -23,14 +23,16 @@ const LoadingContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
 `;
 
 const LoadingText = styled.div`
     font: 1rem 'Noto Sans KR';
     text-align: center;
-    font-size: 50px;
+    font-size: 30px;
     font-weight: bold;
     color: white;
+    margin-bottom: 35px;
 `;
 
 

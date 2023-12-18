@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
 import { FaHeart } from 'react-icons/fa';
-import axios from 'axios';
 
 Modal.setAppElement('#root');
 
@@ -10,38 +9,15 @@ const PopUp = ({ isOpen, onRequestClose, imageUrl, program }) => {
   const [showMore, setShowMore] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
 
-  const sendLogToServer = async (logData) => {
-    try {
-      // 서버의 API 앤드포인트 및 필요한 설정에 맞게 수정
-      const apiUrl = "https://main.jinttoteam.com/api/main/modal_open/";
-  
-      //Axios를 사용하여 서버로 POST 요청 전송
-      await axios.post(apiUrl, logData);
-  
-      console.log("Log sent successfully:", logData);
-    } catch (error) {
-      console.error("Error sending log:", error);
-    }
-  };
-
-  const handleButtonClick = async (buttonType) => {
+  const handleButtonClick = (buttonType) => {
     // 버튼 클릭에 대한 동작을 추가할 수 있습니다.
     console.log(`Button clicked: ${buttonType}`);
     
     // '좋아요' 버튼이면 상태를 토글합니다.
     if (buttonType === 'like') {
       setIsLiked(!isLiked);
-    
-      // subsr 데이터만 추출하여 서버로 전송
-      const subsrLogData = { subsr: program.subsr };
-      sendLogToServer(subsrLogData);
-      await sendLogToServer(subsrLogData);
     }
 
-    if (buttonType === 'trailer') {
-      const subsrLogData = { subsr: program.subsr };
-      await sendLogToServer(subsrLogData);
-    }
   };
 
   if (!program) {
@@ -125,8 +101,8 @@ const PopUp = ({ isOpen, onRequestClose, imageUrl, program }) => {
           )}
           <Description>{program.SMRY}</Description>
           <ButtonContainer>
-            <Button onClick={() => handleButtonClick('trailer')}>예고편</Button>
-            <Button onClick={() => handleButtonClick('watch')}>시청하기</Button>
+            <Button onClick={() => handleButtonClick('watch')}>예고편</Button>
+            <Button onClick={() => handleButtonClick('trailer')}>시청하기</Button>
           </ButtonContainer>
         </ContentContainer>
         <CloseButton onClick={onRequestClose}>닫기</CloseButton>

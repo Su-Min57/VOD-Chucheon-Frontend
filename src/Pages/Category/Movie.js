@@ -6,7 +6,6 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-scroll'; // Import Link from react-scroll
 import styled from 'styled-components'; // Import styled-components
 import RowImage from '../../Components/RowImage';
-import Loading from '../../Components/Loading';
 
 const Movie = () => {
   const [data, setData] = useState([]);
@@ -16,21 +15,21 @@ const Movie = () => {
       button_text: '영화',
     };
 
-    axios.post('http://localhost:8000/api/main/process_button_click/', postData)
-      .then(response => {
+    axios.post('https://main.jinttoteam.com/api/main/process_button_click/', postData)
+    .then(response =>  {
         setData(response.data.data);
         console.log(response.data.data)
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
-  }, []);
+}, []);
+
 
   const movieRef = useRef(null);
 
-//<div>Loading...</div>;
-  if (data.length === 0) {
-    return <Loading />
+  if (!data || data.length === 0) {
+    return <div>Loading...</div>;
   }
 
   const uniqueCleanAssetNames = new Set();
@@ -61,11 +60,11 @@ const Movie = () => {
       <h1>영화</h1>
       {/* 동적으로 버튼 생성 */}
       <ButtonContainer>
-        {Object.keys(groupedData).map(categoryL => (
-          <Link key={categoryL} to={categoryL} smooth duration={500} offset={-movieRef.current?.offsetTop || 0}>
-            <CategoryButton>#{categoryL}</CategoryButton>
-          </Link>
-        ))}
+      {Object.keys(groupedData).map(categoryL => (
+        <Link key={categoryL} to={categoryL} smooth duration={500} offset={-movieRef.current?.offsetTop || 0}>
+          <CategoryButton>#{categoryL}</CategoryButton>
+        </Link>
+      ))}
       </ButtonContainer>
       {Object.entries(groupedData).map(([categoryL, programs]) => (
         <div key={categoryL} id={categoryL}>
@@ -104,4 +103,16 @@ const CategoryButton = styled.button`
   border: none;
   padding: 0.9em 1.3em;
   border-radius: 20px; /* 조절 가능한 값 */
+`;
+
+const ScrollToTopButton = styled(Link)`
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  background-color: #ed174d;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  font-size: 20px;
 `;

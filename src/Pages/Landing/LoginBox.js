@@ -7,7 +7,7 @@ const LoginBox = ({children}) => (
     <Positioner>
         <ShadowedBox>
             <LogoWrapper>
-                <Logo to="/">LG HelloVision</Logo>
+                <Logo to="/">헬로 Pick</Logo>
             </LogoWrapper>
             <Contents>
                 {children}
@@ -25,13 +25,14 @@ const Positioner = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     zIndex: 9999;
+    
 `;
 
 //너비, 그림자 설정
 const ShadowedBox = styled.div`
-    width: 500px;
+    width: 470px;
     border: none;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
 
 //로고
@@ -42,7 +43,7 @@ const LogoWrapper = styled.div`
     align-items: center;
     justify-content: center;
     font-size: 30px;
-    background: #ed174d;
+    background: #ed174d; /* 배경색 추가 및 원하는 색상으로 설정 */
 `;
 
 const Logo = styled(Link)`
@@ -62,6 +63,7 @@ const Contents = styled.div`
     text-align: center;
     background: white;
     padding: 2rem;
+    
 `;
 
 export default LoginBox;
