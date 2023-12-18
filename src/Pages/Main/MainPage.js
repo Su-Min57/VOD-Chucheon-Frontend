@@ -18,7 +18,7 @@ const MainPage = () => {
   
 
    // Fetching data for Recommendations1 with optional hashtag
-  const fetchRecommendations1 = (hashtagValue = null) => {
+  const fetchRecommendations1 = (hashtagValue = 3) => {
     const subsr = localStorage.getItem('subsr');
 
     if (!subsr) {
