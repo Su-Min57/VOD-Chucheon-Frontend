@@ -42,6 +42,7 @@ const MainPage = () => {
     })
       .then(response => {
         console.log('Response received:!!!!', response); // 응답 로깅
+        console.log('hashtag', postData['hashtag'])
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
