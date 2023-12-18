@@ -36,7 +36,6 @@ const MainPage = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache', // 캐시 방지
       },
       body: JSON.stringify(postData),
       credentials: 'include',
