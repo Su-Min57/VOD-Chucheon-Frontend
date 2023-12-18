@@ -16,7 +16,7 @@ const TVdrama = () => {
       button_text: 'TV드라마',
     };
 
-    axios.post('http://main.jinttoteam.com/api/main/process_button_click/', postData)
+    axios.post('https://main.jinttoteam.com/api/main/process_button_click/', postData)
       .then(response => {
         setData(response.data.data);
         console.log(response.data.data)
