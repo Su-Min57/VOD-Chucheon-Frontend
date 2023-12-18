@@ -57,7 +57,13 @@ const MainPage = () => {
         }
       })
       .catch(error => {
-        console.error('Error fetching data for Recommendations1:', error);
+        if (error.response && error.response.status === 400) {
+          // 서버에서 발생한 오류 처리
+          console.error('Server error occurred:', error);
+        } else {
+          // 기타 오류 처리
+          console.error('An error occurred:', error);
+        }
       });
 
    };
