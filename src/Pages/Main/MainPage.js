@@ -18,7 +18,7 @@ const MainPage = () => {
   
 
    // Fetching data for Recommendations1 with optional hashtag
-  const fetchRecommendations1 = (hashtagValue = null) => {
+  const fetchRecommendations1 = (hashtagValue = 3) => {
     const subsr = localStorage.getItem('subsr');
 
     if (!subsr) {
@@ -57,7 +57,13 @@ const MainPage = () => {
         }
       })
       .catch(error => {
-        console.error('Error fetching data for Recommendations1:', error);
+        if (error.response && error.response.status === 400) {
+          // 서버에서 발생한 오류 처리
+          console.error('Server error occurred:', error);
+        } else {
+          // 기타 오류 처리
+          console.error('An error occurred:', error);
+        }
       });
 
    };
