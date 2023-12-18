@@ -25,7 +25,6 @@ const Movie = () => {
       });
 }, []);
 
-
   const movieRef = useRef(null);
 
   if (!data || data.length === 0) {
@@ -103,16 +102,4 @@ const CategoryButton = styled.button`
   border: none;
   padding: 0.9em 1.3em;
   border-radius: 20px; /* 조절 가능한 값 */
-`;
-
-const ScrollToTopButton = styled(Link)`
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  cursor: pointer;
-  background-color: #ed174d;
-  color: white;
-  border: none;
-  padding: 0.5em 1em;
-  font-size: 20px;
 `;

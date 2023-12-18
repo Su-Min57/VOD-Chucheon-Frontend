@@ -111,30 +111,6 @@ const ImageContainer = styled.div`
   }
 `;
 
-const NoImageContainer = styled.div`
-  color: gray;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid lightgray;
-  width: 100%;
-  height: 0;
-  padding-bottom: 150%;
-  box-sizing: border-box;
-`;
-
-const NoImageText = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-`;
-
 const HoverImage = styled.img`
   max-width: 100%;
   height: auto;
