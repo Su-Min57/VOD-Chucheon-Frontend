@@ -34,7 +34,7 @@ const MainPage = () => {
     console.log(postData_)
 
     // Fetching data for Recommendations1
-    fetch('http://localhost:8000/api/main/recommendation_1/', {
+    fetch('https://main.jinttoteam.com/api/main/recommendation_1/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
