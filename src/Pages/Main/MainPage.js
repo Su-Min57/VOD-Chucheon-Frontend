@@ -18,7 +18,7 @@ const MainPage = () => {
   
 
    // Fetching data for Recommendations1 with optional hashtag
-  const fetchRecommendations1 = (hashtagValue = 3) => {
+  const fetchRecommendations1 = (hashtagValue) => {
     const subsr = localStorage.getItem('subsr');
 
     if (!subsr) {
@@ -26,44 +26,38 @@ const MainPage = () => {
       return;
     }
 
-    const postData = {
+    const postData_ = {
       subsr: subsr,
       hashtag: hashtagValue, 
     };
-    alert('postData before request: ' + JSON.stringify(postData));
+    
+    console.log(postData_)
+
     // Fetching data for Recommendations1
-    fetch('https://main.jinttoteam.com/api/main/recommendation_1/', {
+    fetch('http://localhost:8000/api/main/recommendation_1/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(postData),
+      body: JSON.stringify(postData_),
       credentials: 'include',
     })
       .then(response => {
-        console.log('Response received:!!!!', response); // 응답 로깅
-        console.log('hashtag', postData['hashtag'])
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         return response.json();
       })
       .then(data => {
-        console.log('Data received:', data);
         if (data?.data) {
           setRecommendations1(data.data);
+          console.log(data.data)
         } else {
           console.error('Data for Recommendations1 is undefined or null');
         }
       })
       .catch(error => {
-        if (error.response && error.response.status === 400) {
-          // 서버에서 발생한 오류 처리
-          console.error('Server error occurred:', error);
-        } else {
-          // 기타 오류 처리
-          console.error('An error occurred:', error);
-        }
+        console.error('Error fetching data for Recommendations1:', error);
       });
 
    };
@@ -97,7 +91,7 @@ const MainPage = () => {
     const postData = {
       subsr: subsr,
     };
-
+    
     fetchRecommendations1();
 
     // Fetching data for Recommendations2
@@ -190,6 +184,23 @@ const MainPage = () => {
     
    };
 
+   const formatCurrentTime = (timeString) => {
+    const [hours, minutes] = timeString.split(':');
+    const parsedHours = parseInt(hours, 10);
+  
+    if (parsedHours >= 12) {
+      return `PM ${parsedHours === 12 ? parsedHours : parsedHours - 12}:${minutes}`;
+    } else {
+      return `AM ${parsedHours === 0 ? '12' : parsedHours}:${minutes}`;
+    }
+  };
+
+  const getCurrentHour = () => {
+    const now = new Date();
+    return now.getHours();
+  };
+  
+
   if (!recommendations1 || recommendations1.length === 0) {
     return <Loading />
   }
@@ -205,51 +216,59 @@ const MainPage = () => {
 
   return (
       <div style={{ background: 'black', color: 'white', padding: '20px' }}>
-        <h1 style={{ color: 'white' }}>MD가 <span style={{ color: '#ED174D' }}>Pick</span>한 프로그램들!</h1>
+        <h1 style={{ color: 'white' }}>헬로Pick <span style={{ color: '#ED174D' }}>MD</span>의 숨겨진 추천 Playlist 🎧</h1>
 
-        <div>
          <ButtonContainer>
             {[1, 2, 3, 4].map((num) => (
               <Button key={num} onClick={() => handleHashtagClick(num)}  isSelected={selectedButton === num}>
-                #{num === 1 ? '시간대별' : num === 2 ? '평일' : num === 3 ? '주말' : num === 4 ? '불금' : ''}
+                #{num === 1 ? ' 시간대🕛' : num === 2 ? ' 평일🍀' : num === 3 ? ' 주말🌟' : num === 4 ? ' 불금🔥' : ''}
               </Button>
             ))}
          </ButtonContainer>
-         <p style={{ fontWeight: 'bold', fontSize: '25px', marginTop: '10px' }}>
-              현재 시간, {currentTime}
-         </p>
-        </div>
-        <div style={{ background: "rgba(169, 169, 169, 0.15)", padding: '10px', height: '500px'}}>
-            {/* 왼쪽 반 */}
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '0px 20px' }}>
-            <p style={{ fontWeight: 'bold', fontSize: '25px', marginBottom: '10px', marginTop: '30px'}}>
-              {selectedButton === 1
-                ? '이 시간대에 사람들이 많이 봤어요!'
-                : selectedButton === 2
-                ? '일하고 나서 쉬는 동안 이런 프로그램 어떠신가요?'
-                : selectedButton === 3
-                ? '아늑한 주말에는 이런 프로그램 어떠신가요?'
-                : selectedButton === 4
-                ? '불타는 금요일엔 이런 프로그램 어떠신가요?'
-                : ''}
-            </p>
-          </div>
-  
-          {/* 오른쪽 반 */}
-          <div style={{ marginLeft: '20px', marginRight: '20px', marginTop: '20px', flex:1, overflow:'hidden'}}>
-            {recommendations1.length > 0 ? (
-                  <TimeRowImage data={recommendations1.slice(0, 5)} />
-            ) : (
-              <div style={{ background: 'lightgray', padding: '10px', height: '100%'}}>
-                No Recommendations4 available.
-              </div>
-            )}
-          </div>
-        </div>
+
+         <Wrapper>
+          <Description1>
+              {selectedButton === 1 ? (
+                <>
+                  <TabbedDescription1>지금은 {formatCurrentTime(currentTime)}</TabbedDescription1>{' '}
+                  <TabbedDescription1><span style={{ color: '#ED174D' }}>{getCurrentHour()}시</span> 인기 급상승 프로그램 </TabbedDescription1>
+                  <TabbedDescription2>| 자세한 정보는 이미지를 클릭해주세요</TabbedDescription2>
+                </>
+              ) : selectedButton === 2 ? (
+                <>
+                  <TabbedDescription1>일하고 나서 쉬는 동안</TabbedDescription1>{' '}
+                  <TabbedDescription1>고생했던 마음이 녹아내려요</TabbedDescription1>{' '}
+                  <TabbedDescription2>| 자세한 정보는 이미지를 클릭해주세요</TabbedDescription2>
+                </>
+              ) : selectedButton === 3 ? (
+                <>
+                  <TabbedDescription1>아늑한 주말을 알차게 보낼</TabbedDescription1>{' '}
+                  <TabbedDescription1>집순이들을 위해 준비했습니다</TabbedDescription1>{' '}
+                  <TabbedDescription2>| 자세한 정보는 이미지를 클릭해주세요</TabbedDescription2>
+                </>
+              ) : selectedButton === 4 ? (
+                <>
+                  <TabbedDescription1>불타는 금요일, 헬로 Pick과</TabbedDescription1>{' '}
+                  <TabbedDescription1>즐길 준비 되셨나요?</TabbedDescription1>{' '}
+                  <TabbedDescription2>| 자세한 정보는 이미지를 클릭해주세요</TabbedDescription2>
+                </>
+              ) : null}
+          </Description1>
+            <StyleRow>
+              {recommendations1.length > 0 ? (
+                <TimeRowImage data={recommendations1.slice(0, 5)} />
+              ) : (
+                <div style={{ background: 'lightgray', padding: '10px', height: '100%' }}>
+                  No Recommendations4 available.
+                </div>
+              )}
+            </StyleRow>
+          <ImageInWrapper src="./images/w_button.png" alt="재생버튼" />
+        </Wrapper>  
 
       <ADBanner />
-      <div style={{ marginTop: '25px' }}>
-        <h2 style={{ marginBottom: '5px' }}>🤗 AI가 추천해주는 프로그램이에요 🤗</h2>
+      <div style={{ marginTop: '60px', marginBottom: '10px' }}>
+        <h2 style={{ marginBottom: '5px' }}> 🤖 AI가 추천해주는 Playlist </h2>
         {recommendations3.length > 0 ? (
               <RowImage data={recommendations3.slice(0, 20)} />
         ) : (
@@ -258,17 +277,19 @@ const MainPage = () => {
           </div>
         )}
       </div>
-
-      <h2 style={{ marginBottom: '5px' }}>❤️ 가장 최근 본 작품과 비슷한 작품들이에요! ❤️</h2>
+      <div style={{ marginTop: '40px', marginBottom: '0px' }}>
+        <h2 style={{ marginBottom: '5px' }}> 📽️ 가장 최근 본 작품과 유사한 Playlist </h2>
       {recommendations4.length > 0 ? (
-            <RowImage data={recommendations4.slice(0, 20)} />
+          <RowImage data={recommendations4.slice(0, 20)} />
       ) : (
         <div style={{ background: 'lightgray', padding: '10px' }}>
           No Recommendations4 available.
         </div>
       )}
+      </div>
       
-        <h2 style={{ marginBottom: '5px' }}>🦔 가장 선호하는 장르 추천해드려요! 🦔</h2>
+      <div style={{ marginTop: '-10px', marginBottom: '50px' }}>
+        <h2 style={{ marginBottom: '5px' }}> 💘 좋아하는 장르 Playlist </h2>
         {recommendations2.length > 0 ? (
           <RowImage data={recommendations2.slice(0, 20)} />
         ) : (
@@ -276,10 +297,69 @@ const MainPage = () => {
             No Recommendations2 available.
           </div>
         )}
-
+      </div>
     </div>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between; /* 각 요소 사이의 간격을 최대화하여 배치 */
+  align-items: flex-start; /* 세로 방향으로 맨 위에 정렬 */
+  padding: 20px; /* 원하는 패딩 값으로 조절 */
+  background-color: #4A4C59;
+  overflow: hidden; /* 넘치는 부분 감춤 */
+  position: relative;
+  height: 400px;
+  margin-top: -5px
+
+`;
+
+const StyleRow = styled.div`
+    flex: flex-end; /* 남은 공간을 차지하도록 설정 */
+    align-self: flex-start; /* 추가 */
+    margin-top: 10px;
+    margin-right: 40px;
+`;
+
+
+
+const ImageInWrapper = styled.img`
+position: absolute;
+bottom: 42px; /* Wrapper 아래에 위치하도록 지정 */
+left: 0; /* Wrapper 왼쪽에 위치하도록 지정 */
+width: 80px; /* 필요에 따라 크기 조절 */
+height: 80px; /* 필요에 따라 크기 조절 */
+margin-left: 35px;
+background-color:transparent;
+`;
+
+
+const TabbedDescription1 = styled.span`
+  display: inline-block;
+  padding-bottom: 5px; /* 밑줄과 텍스트 사이의 간격 조절 */
+`;
+
+const TabbedDescription2 = styled.p`
+  display: inline-block;
+  padding-bottom: 5px; /* 밑줄과 텍스트 사이의 간격 조절 */
+  font-size: 15px;
+  margin-left: 5px;
+  font-weight: normal; 
+  margin-top: 20px;
+`;
+
+
+const Description1 = styled.p`
+  font-size: 2rem;
+  margin-top: 22px;
+  margin-left: 20px;
+  top: 0;
+  color: white;
+  font-weight: bold;
+  width: 450px;
+`;
+
 
 const Button = styled.button`
   margin: 5px;
@@ -301,9 +381,9 @@ const ButtonContainer = styled.div`
   max-width: 800px;
   flex-wrap: wrap;
   gap: 2px;
-  margin-left: -10px;
-  margin-top: 20px;
-  margin-bottom: 20px; /* 수정된 부분 */
+  margin-left: -5px;
+  margin-top: 0px;
+  margin-bottom: 25px; /* 수정된 부분 */
 `;
 
 

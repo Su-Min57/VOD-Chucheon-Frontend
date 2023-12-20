@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
 import { useAuth } from '../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { LoginBox, LoginButton, LoginContent, Now } from '.'; 
+import { LoginBox, LoginButton, LoginContent, Now } from '.';
 import Cookies from 'js-cookie';
 
 const LoginPage = () => {
-  const [subsr, setSubsr] = useState('');
+  const [subsr, setSubsr] = useState(localStorage.getItem('subsr') || ''); // 로컬 스토리지에서 불러오기
   const [useIp, setUseIp] = useState('');
-  const [rememberSetTopBox, setRememberSetTopBox] = useState(false); 
+  const [rememberSetTopBox, setRememberSetTopBox] = useState(
+    localStorage.getItem('rememberSetTopBox') === 'true' || false
+  ); // 로컬 스토리지에서 불러오기
   const { login } = useAuth();
-  const navigate = useNavigate(); // useNavigate를 사용
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     console.log('Login button clicked');
@@ -20,24 +22,25 @@ const LoginPage = () => {
         subsr: subsr,
         use_ip: useIp,
       });
-      
+
       if (response && response.data) {
         const { access, refresh } = response.data;
 
         if (rememberSetTopBox) {
           localStorage.setItem('subsr', subsr);
+          localStorage.setItem('rememberSetTopBox', 'true');
+        } else {
+          localStorage.removeItem('rememberSetTopBox');
         }
 
-        // 쿠키에 토큰 저장
         Cookies.set('access_token', access);
         Cookies.set('refresh_token', refresh);
         console.log('Access Token:', access);
         console.log('Refresh Token:', refresh);
-        localStorage.setItem('subsr', subsr)
-  
+
         login();
-        navigate('/main'); // 로그인 성공 후 메인페이지로 이동
-        console.log('go main!')
+        navigate('/main');
+        console.log('go main!');
       } else {
         console.error('Login failed: Invalid response format');
       }
@@ -50,34 +53,33 @@ const LoginPage = () => {
     }
   };
 
+  useEffect(() => {
+    // 새로고침할 때 로컬 스토리지에서 값 불러오기
+    setSubsr(localStorage.getItem('subsr') || '');
+    setRememberSetTopBox(localStorage.getItem('rememberSetTopBox') === 'true' || false);
+  }, []);
+
   return (
     <StyledLoginPage>
-      <Now/>
+      <Now />
       <LoginBox>
         <LoginContent title="Login">
           <CenteredText>로그인 후 이용 부탁드립니다.</CenteredText>
-            <Wrapper>
-              <input type="text" placeholder="셋톱번호" value={subsr} onChange={(e) => setSubsr(e.target.value)} />
-              <input type="password" placeholder="비밀번호" value={useIp} onChange={(e) => setUseIp(e.target.value)} />
-              <RememberCheckbox>
-              <input
-                type="checkbox"
-                checked={rememberSetTopBox}
-                onChange={() => setRememberSetTopBox(!rememberSetTopBox)}
-              />
+          <Wrapper>
+            <input type="text" placeholder="셋톱번호" value={subsr} onChange={(e) => setSubsr(e.target.value)} />
+            <input type="password" placeholder="비밀번호" value={useIp} onChange={(e) => setUseIp(e.target.value)} />
+            <RememberCheckbox>
+              <input type="checkbox" checked={rememberSetTopBox} onChange={() => setRememberSetTopBox(!rememberSetTopBox)} />
               <span>아이디 저장</span>
             </RememberCheckbox>
-            </Wrapper>
-            <LoginButton onClick={handleLogin}>
-              로그인
-            </LoginButton>
+          </Wrapper>
+          <LoginButton onClick={handleLogin}>로그인</LoginButton>
         </LoginContent>
-      </LoginBox>   
+      </LoginBox>
     </StyledLoginPage>
   );
 };
 
-// 배경색과 전체 컴포넌트
 const StyledLoginPage = styled.div`
   display: flex;
   justify-content: center;
@@ -85,9 +87,8 @@ const StyledLoginPage = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: black;
-  `;
+`;
 
-// subsr과 password 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -97,22 +98,20 @@ const Wrapper = styled.div`
   padding-top: 5rem;
   padding-bottom: 2rem;
 
-  /* 스타일 추가 */
   & input {
     margin-bottom: 15px;
     padding: 15px;
     font-size: 15px;
     background-color: white;
-    border: 2px solid rgba(200, 200, 200, 0.5); /* 초기에는 투명한 선 */
-    outline: none; /* 마우스 클릭 시 파란 테두리 제거 */
-    transition: border 0.3s; /* 부드러운 전환을 위한 트랜지션 */
+    border: 2px solid rgba(200, 200, 200, 0.5);
+    outline: none;
+    transition: border 0.3s;
   }
 
-  /* input에 focus가 되었을 때 */
   & input:focus {
     background-color: white;
     color: black;
-    border: 2px solid #181818; /* 클릭 시 검정 선 추가 */
+    border: 2px solid #181818;
   }
 `;
 
@@ -120,7 +119,7 @@ const CenteredText = styled.div`
   text-align: center;
   margin-top: 4rem;
   margin-bottom: -4rem;
-  color:  rgba(50, 50, 50, 0.7);
+  color: rgba(50, 50, 50, 0.7);
   font-size: 15px;
 `;
 
@@ -130,6 +129,7 @@ const RememberCheckbox = styled.label`
   margin-top: -5px;
   margin-bottom: 10px;
   font-size: 14px;
+  color: black;
 
   input {
     margin-right: 5px;
@@ -138,4 +138,3 @@ const RememberCheckbox = styled.label`
 `;
 
 export default LoginPage;
-

@@ -7,7 +7,7 @@ const LoginBox = ({children}) => (
     <Positioner>
         <ShadowedBox>
             <LogoWrapper>
-                <Logo to="/">헬로 Pick</Logo>
+                <Logo to="/">헬로Pick</Logo>
             </LogoWrapper>
             <Contents>
                 {children}

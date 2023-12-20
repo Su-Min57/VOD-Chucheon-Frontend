@@ -99,8 +99,6 @@ const SearchComponent = () => {
 };
 
 
-
-
 const BlackContainer = styled.div`
   background-color: black;
   width: 100vw; /* 100% viewport width */
