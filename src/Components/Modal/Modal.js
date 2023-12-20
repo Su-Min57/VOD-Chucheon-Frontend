@@ -105,7 +105,9 @@ const PopUp = ({ isOpen, onRequestClose, imageUrl, program }) => {
             <Button onClick={() => handleButtonClick('trailer')}>시청하기</Button>
           </ButtonContainer>
         </ContentContainer>
-        <CloseButton onClick={onRequestClose}>닫기</CloseButton>
+        <CloseButton onClick={onRequestClose}>
+          <CloseButtonImage src = "/images/close_icon.png" alt="Close" />
+        </CloseButton>
       </PopUpContainer>
     </Modal>
   );
@@ -135,7 +137,9 @@ const ContentContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin-left: 20px;
-  margin-right: 20px;
+  margin-right: 10%;
+  width: 100%; /* ImageContainer와 같은 width */
+  height: 450px; /* ImageContainer와 같은 height */
 `;
 
 const PopUpImage = styled.img`
@@ -178,11 +182,12 @@ const Title = styled.p`
   font-weight: bold;
   color: white;
   margin-bottom: 10px;
+  margin-top: 0px;
 `;
 
 const Description = styled.p`
-  margin-top: 20px;
-  margin-bottom: 50px;
+  margin-top: 10px;
+  margin-bottom: 5rem;
   font-size: 17px;
   color: white;
 `;
@@ -197,6 +202,11 @@ const SubDescription2 = styled.p`
   color: white;
   margin-top: 10px;
   margin-bottom: 10px;
+`;
+
+const CloseButtonImage = styled.img`
+  width: 30px; /* 적절한 크기로 조절하세요 */
+  height: auto;
 `;
 
 export default PopUp;

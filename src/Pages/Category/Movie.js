@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-scroll'; // Import Link from react-scroll
 import styled from 'styled-components'; // Import styled-components
 import RowImage from '../../Components/RowImage';
+import Loading from '../../Components/Loading';
 
 const Movie = () => {
   const [data, setData] = useState([]);
@@ -28,7 +29,7 @@ const Movie = () => {
   const movieRef = useRef(null);
 
   if (!data || data.length === 0) {
-    return <div>Loading...</div>;
+    return <Loading />
   }
 
   const uniqueCleanAssetNames = new Set();
