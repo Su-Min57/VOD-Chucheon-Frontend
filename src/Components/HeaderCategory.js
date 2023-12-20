@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from 'react-router-dom';
-import Weather from "./Weather";
+//import Weather from "./Weather";
 
 const HeaderCategory = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
-  
-  const changePage = path => {
+
+  const changePage = (path) => {
     navigate(path);
   };
 
@@ -19,24 +19,32 @@ const HeaderCategory = () => {
           <LogoImg src="/images/LG_logo.png" />
         </LogoLink>
       </Logo>
-      <CategoryList active={pathname === '/main'} onClick={() => changePage("/main")}>
+      <CategoryList active={pathname === '/main' ? 'true' : 'false'} onClick={() => changePage("/main")}>
         홈
       </CategoryList>
-      <CategoryList active={pathname === '/Category/tvdrama'} onClick={() => changePage("/Category/tvdrama")}>
-        TV 드라마
-      </CategoryList>
-      <CategoryList active={pathname === '/Category/tvshow'} onClick={() => changePage("/Category/tvshow")}>
+      {/* <CategoryList active={pathname === '/Category/tvdrama' ? 'true' : 'false'} onClick={() => changePage("/Category/tvdrama")}>
+        얄라얄라
+      </CategoryList> */}
+      <CategoryList active={pathname === '/Category/tvshow' ? 'true' : 'false'} onClick={() => changePage("/Category/tvshow")}>
         TV방송
       </CategoryList>
-      <CategoryList active={pathname === '/Category/movie'} onClick={() => changePage("/Category/movie")}>
+      <CategoryList active={pathname === '/Category/movie' ? 'true' : 'false'} onClick={() => changePage("/Category/movie")}>
         영화
       </CategoryList>
-      <CategoryList active={pathname === '/search'} onClick={() => changePage("/search")}>
+      <CategoryList active={pathname === '/Category/kids' ? 'true' : 'false'} onClick={() => changePage("/Category/kids")}>
+        키즈
+      </CategoryList>
+      <CategoryList active={pathname === '/Category/animation' ? 'true' : 'false'} onClick={() => changePage("/Category/animation")}>
+        애니메이션
+      </CategoryList>
+      
+       {/*<CategoryList active={pathname === '/search' ? 'true' : 'false'} onClick={() => changePage("/search")}>
         검색
       </CategoryList>
-      <WeatherContainer>
+      
+       {/*<WeatherContainer>
         <Weather />
-      </WeatherContainer>
+      </WeatherContainer> */}
     </Wrapper>
   );
 };
@@ -67,32 +75,36 @@ const LogoImg = styled.img`
 `;
 
 const CategoryList = styled.li`
-  color: ${props => (props.active ? '#ED174D' : 'white')};
+  color: ${props => (props.active === 'true' ? '#ED174D' : 'white')};
   font-size: 20px;
   margin: 0px 20px 5px 60px;
   position: relative;
+  cursor: pointer;
 
+  /* 카테고리 클릭시 밑줄 기능 - 주석처리
   &:after {
     content: '';
     display: block;
     position: absolute;
     width: 100%;
     height: 2px;
-    background-color: ${props => (props.active ? '#ED174D' : 'transparent')};
+    background-color: ${props => (props.active === 'true' ? '#ED174D' : 'transparent')};
     bottom: 0;
     left: 0;
     transition: background-color 0.3s ease;
   }
+  */
 
   &:hover {
     color: #ED174D;
   }
 `;
 
+/* weather컨데이너
 const WeatherContainer = styled.div`
-  margin-left: 50px; /* 검색 아이콘 오른쪽으로 이동 */
+  margin-left: 50px; 
   display: flex;
   align-items: center;
-`;
+`;*/
 
 export default HeaderCategory;
