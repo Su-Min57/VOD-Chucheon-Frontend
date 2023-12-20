@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import oc from 'open-color';
 import { shadow } from '../../Utils/styleUtil';
 
 const LoginButton = ({children, onClick}) => (
@@ -32,7 +31,7 @@ const Wrapper = styled.div`
     }
 
     &:active {
-        background: ${oc.teal[7]};
+        background: rgba(50, 50, 50, 0.9);
     }
 
 `;

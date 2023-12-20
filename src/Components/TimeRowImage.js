@@ -1,114 +1,86 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.css';
-import PopUp from './Modal/Modal';
+import { SwiperSlide } from 'swiper/react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Modal from './Modal/Modal';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
-const RowImage = ({ data }) => {
+const TimeRowImage = ({ data }) => {
   const [selectedImage, setSelectedImage] = useState('');
   const [selectedProgram, setSelectedProgram] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = (image, program) => {
     setSelectedImage(image);
     setSelectedProgram(program);
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setSelectedImage(null);
-    setSelectedProgram(null);
+    setSelectedImage('');
+    setSelectedProgram('');
+    setIsModalOpen(false);
   };
 
-  const uniqueData = data.reduce((unique, program) => {
-    if (!unique.find((item) => item.clean_asset_nm === program.clean_asset_nm)) {
-      unique.push(program);
-    }
-    return unique;
-  }, []);
+  const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 3000,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 1500,
+    arrows: true,
+  };
 
   return (
-    <>      
-      <StyledSwiper
-        spaceBetween={10}
-        slidesPerView={5}
-        navigation={true} // navigation 활성화
-        pagination={{ clickable: true, el: '.swiper-pagination' }}
-        scrollbar={{ draggable: true, el: '.swiper-scrollbar' }}
-      >
-        <div className="swiper-pagination" style={{ display: 'none' }} />
-        <div className="swiper-scrollbar" style={{ display: 'none' }} />
-        
-        {uniqueData.map((program, index) => (
+    <>
+      <StyledSlider {...sliderSettings}>
+        {data.map((program, index) => (
+          program.image && (
             <SwiperSlide key={index}>
+              <ImageContainer onClick={() => openModal(program.image, program)}>
                 {program.image && (
-                <ImageContainer onClick={() => openModal(program.image, program)}>
-                    <div>
-                    <HoverImage 
-                        src={program.image}
-                        alt={program.clean_asset_nm}
-                        style={{ width: '100%', height: '100%', objectFit: 'contain'}}
-                    />
-                    <p>{program.clean_asset_nm}</p>
-                    </div>
-                </ImageContainer>
+                  <HoverImage
+                    src={program.image}
+                    alt={program.asset_nm}
+                    onMouseEnter={(e) => e.currentTarget.classList.add('hovered')}
+                    onMouseLeave={(e) => e.currentTarget.classList.remove('hovered')}
+                  />
                 )}
+                <Titleletter>{program.asset_nm}</Titleletter>
+              </ImageContainer>
             </SwiperSlide>
-            ))}
-        </StyledSwiper>
-      <PopUp isOpen={!!selectedImage} onRequestClose={closeModal} imageUrl={selectedImage} program={selectedProgram} />
+          )
+        ))}
+      </StyledSlider>
+      <Modal isOpen={isModalOpen} onRequestClose={closeModal} imageUrl={selectedImage} program={selectedProgram} />
     </>
-  );
-};
+   );
+ };
 
-
-const StyledSwiper = styled(Swiper)`
-   max-height: 100%;
-  .swiper-button-prev,
-  .swiper-button-next {
-    background-color: black;
-    opacity: 1;
-    padding: 5px 5px;
-    width: 20px;   /* 버튼의 너비 */
-    height: 20px;  /* 버튼의 높이 */
-    color: white !important;
-    border-radius: 50px;
-    position: absolute;  /* 절대 위치 설정 */
-    top: 50%;            /* 상단에서의 위치 (수직 중앙) */
-    transform: translateY(-50%);  /* 세로 중앙 정렬 */
-    transition: opacity 0.3s;  /* 투명도 변화에 애니메이션 효과 적용 */
-    opacity: 0;  /* 기본적으로 투명하게 설정 */
+const StyledSlider = styled(Slider)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  width: 600px;
+  .slick-slide {
+    margin: 0 0px 5px;
   }
-
-  &:hover {
-    .swiper-button-prev,
-    .swiper-button-next {
-      opacity: 0.7;  /* 마우스 호버 시에만 투명도를 다시 설정하여 나타나도록 함 */
-    }
-  }
-
-  .swiper-button-prev:after,
-  .swiper-button-next:after {
-    font-size: 0.8rem !important;
-    font-weight: 600 !important;
-  }
-
-  .swiper-pagination-bullet {
-    background: black !important;
-  }
+  background-color: #4A4C59;
+  
 `;
 
-const ImageContainer = styled.div`
-  margin: 0.5px;
-  padding: 5px;
-  cursor: pointer; 
-  text-align: center;
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    height: auto;
-  }
+const Titleletter = styled.p`
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: white;
 `;
 
 const HoverImage = styled.img`
@@ -120,4 +92,23 @@ const HoverImage = styled.img`
   }
 `;
 
-export default RowImage;
+const ImageContainer = styled.div`
+  margin: 30px;
+  padding: 5px;
+  text-align: center;
+  cursor: pointer;
+
+  img {
+    max-width: 100%;
+    width: 230px;
+    height: 305px;
+  }
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+`;
+
+export default TimeRowImage;
