@@ -8,6 +8,8 @@ const SearchModal = ({ isOpen, onClose, onSubmit }) => {
   const { pathname } = location;
   const [searchText, setSearchText] = useState('');
   const modalRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(true);
+  const [topPosition, setTopPosition] = useState(90);
 
   const handleInputChange = (e) => {
     setSearchText(e.target.value);
@@ -25,6 +27,7 @@ const SearchModal = ({ isOpen, onClose, onSubmit }) => {
     // Use encodeURIComponent to handle special characters in the URL
     const encodedSearchText = encodeURIComponent(searchText);
     navigate(`/search?term=${encodedSearchText}`);
+    window.scrollTo(0, 0);
     onClose();
   };
 
@@ -60,14 +63,42 @@ const SearchModal = ({ isOpen, onClose, onSubmit }) => {
     };
   }, [onClose]);
 
+  const handleRecommendedSearchClick = (recommendedTerm) => {
+    // Use encodeURIComponent to handle special characters in the URL
+    const encodedRecommendedTerm = encodeURIComponent(recommendedTerm);
+    navigate(`/search?term=${encodedRecommendedTerm}`);
+    window.scrollTo(0, 0);
+    onClose();
+  };
+
+
+  useEffect(() => {
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsVisible(true);
+      const topPosition = Math.max(90 - currentScrollY, 0);
+      setTopPosition(topPosition);
+      if (currentScrollY !== 0) {
+        onClose();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [onClose]);
+
 
   return (
     <ModalOverlay isOpen={isOpen} onClick={handleOverlayClick}>
-      <ModalContainer ref={modalRef} onClick={handleModalClick}>
+      <ModalContainer ref={modalRef} onClick={handleModalClick} isVisible={isVisible} top={topPosition}>
         <SearchContainer>
           <SearchInput
             type="text"
-            placeholder="찾으시는 검색어를 입력하세요."
+            placeholder="찾으시는 프로그램명을 입력하세요."
             value={searchText}
             onChange={handleInputChange}
             onKeyDown={handleEnterKey} // 엔터 키 감지 이벤트
@@ -78,15 +109,43 @@ const SearchModal = ({ isOpen, onClose, onSubmit }) => {
               changePage("/search");
               resetSearchText();
             }}
-          >
-            검색
-          </SearchButton>
+          />
         </SearchContainer>
+        <TitleContainer>{`추천 검색어`}
+          <Divider>|</Divider>
+        </TitleContainer>
+        <RecommendedContainer>
+        {/* Recommended search terms */}
+          <RecommendedSearchTerm onClick={() => handleRecommendedSearchClick('뽀로로')}>뽀로로</RecommendedSearchTerm>
+          <RecommendedSearchTerm onClick={() => handleRecommendedSearchClick('공룡')}>공룡</RecommendedSearchTerm>
+          <RecommendedSearchTerm onClick={() => handleRecommendedSearchClick('서울')}>서울</RecommendedSearchTerm>
+          <RecommendedSearchTerm onClick={() => handleRecommendedSearchClick('사랑')}>사랑</RecommendedSearchTerm>
+          <RecommendedSearchTerm onClick={() => handleRecommendedSearchClick('핑크퐁')}>핑크퐁</RecommendedSearchTerm>
+        {/* Add more recommended search terms as needed */}
+        </RecommendedContainer>
       </ModalContainer>
     </ModalOverlay>
   );
 };
 
+
+const RecommendedContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0px;
+  margin-left: 70px;
+`;
+
+const Divider = styled.span`
+  margin: 0 25px;
+  color: white;
+`;
+
+const TitleContainer = styled.div`
+  margin-top: 10px;
+  margin-left: -305px;
+`;
 
 const ModalOverlay = styled.div`
   display: ${(props) => (props.isOpen ? "flex" : "none")};
@@ -101,25 +160,27 @@ const ModalOverlay = styled.div`
 
 const ModalContainer = styled.div`
   position: fixed;
-  top: 90px; /* 조정된 부분: 위쪽 여백을 조정할 수 있습니다. */
+  
+  top: ${(props) => (props.isVisible ? "90px" : "-180px")};
   left: 50%;
   transform: translate(-50%, 0);
-  width: 100%;    
-  height: 150px;
+  width: 100%;
+  height: 142px;
   background-color: white;
   padding: 20px;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.5); //rgba(0, 0, 0, 0.5)
+  background: rgba(107, 107, 107, 1); //rgba(0, 0, 0, 0.5)
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  `;
+  transition: top -3000s ease;
+`;
 
 const SearchContainer = styled.div`
   position: relative;
-  width: 100%
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -129,40 +190,51 @@ const SearchContainer = styled.div`
 const SearchInput = styled.input`
   margin-bottom: 10px;
   padding: 10px;
-  width: 360px;
+  width: 450px;
   box-sizing: border-box;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 17px;
   color: white;
   border: none;
-  border-bottom: 3px solid pink;
+  border-bottom: 3px solid white;
   outline: none;
   background-color: transparent;
-
-  &:focus {
-    border-bottom: 3px solid #ED174D; /* Change color on focus */
+  &::placeholder {
+    color: #A3A6A6; /* placeholder 텍스트 색상 설정 */
   }
 `;
 
 const SearchButton = styled.button`
-  background-color: #ED174D;
-  color: white;
+  background-color: transparent; /* 기존 배경 색상을 투명하게 변경 */
+  background-image: url('./images/open_btn_search.png'); /* 이미지 경로를 설정하세요 */
+  background-size: cover;
+  background-repeat: no-repeat;
   border: none;
-  padding: 15px;
+  width: 25px; /* 이미지의 크기에 맞게 조절하세요 */
+  height: 25px;
   cursor: pointer;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  margin-left: -35px;
+  margin-bottom: 20px;
+  transition: background-color 0.01s ease;
 
   &:hover {
-    background-color: #C70039;
+    background-color: transparent;
   }
 
   &:active {
-    background-color: #AA0025;
+    background-color: transparent;
   }
 `;
 
+const RecommendedSearchTerm = styled.div`
+  cursor: pointer;
+  color: white;
+  text-align: center;
+  margin-top: -20px;
+  margin-left: 15px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
 export default SearchModal;

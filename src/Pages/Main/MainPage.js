@@ -346,7 +346,7 @@ const TabbedDescription2 = styled.p`
   font-size: 15px;
   margin-left: 5px;
   font-weight: normal; 
-  margin-top: 20px;
+  margin-top: 25px;
 `;
 
 
