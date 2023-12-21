@@ -3,6 +3,7 @@ import styled from "styled-components";
 import HeaderCategory from "./HeaderCategory";
 import HeaderRight from "./HeaderRight";
 
+
 const Header = () => {
   const [isscroll, setIsScroll] = useState(false);
 
@@ -20,7 +21,7 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+  
   return (
     <>
       <HeaderNormalLayout isscroll={isscroll ? "true" : "false"}>

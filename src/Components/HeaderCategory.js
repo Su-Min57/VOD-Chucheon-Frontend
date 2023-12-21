@@ -16,7 +16,7 @@ const HeaderCategory = () => {
     <Wrapper>
       <Logo>
         <LogoLink>
-          <LogoImg src="/images/LG_logo.png" />
+          <LogoImg src="/images/hello_ppick.png" />
         </LogoLink>
       </Logo>
       <CategoryList active={pathname === '/main' ? 'true' : 'false'} onClick={() => changePage("/main")}>
@@ -38,13 +38,9 @@ const HeaderCategory = () => {
         애니메이션
       </CategoryList>
       
-       {/*<CategoryList active={pathname === '/search' ? 'true' : 'false'} onClick={() => changePage("/search")}>
+       {/* <CategoryList active={pathname === '/search' ? 'true' : 'false'} onClick={() => changePage("/search")}>
         검색
-      </CategoryList>
-      
-       {/*<WeatherContainer>
-        <Weather />
-      </WeatherContainer> */}
+      </CategoryList> */}
     </Wrapper>
   );
 };
@@ -69,7 +65,7 @@ const LogoLink = styled.a`
 const LogoImg = styled.img`
   margin: 0;
   width: 310px;
-  height: 300px;
+  height: 250px;
   object-fit: contain;
   align-items: center;
 `;
@@ -99,12 +95,5 @@ const CategoryList = styled.li`
     color: #ED174D;
   }
 `;
-
-/* weather컨데이너
-const WeatherContainer = styled.div`
-  margin-left: 50px; 
-  display: flex;
-  align-items: center;
-`;*/
 
 export default HeaderCategory;
