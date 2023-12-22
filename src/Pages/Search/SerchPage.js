@@ -14,19 +14,33 @@ const SearchPage = () => {
   const [, setLoading] = useState(false);
 
   useEffect(() => {
+    if (searchData.length > 0) {
+      const uniquePrograms = Array.from(new Set(searchData.map(program => program.image + program.clean_asset_nm)))
+        .map(uniqueKey => searchData.find(program => uniqueKey === program.image + program.clean_asset_nm));
+
+      setProgramData(uniquePrograms);
+    } else {
+      // 데이터가 없을 경우 programData를 빈 배열로 설정
+      setProgramData([]);
+    }
+  }, [searchData]);
+
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-
-        const response = await axios.post('http://main.jinttoteam.com/api/main/search/', {
+        const response = await axios.post('http://localhost:8000/api/main/search/', {
           programName: searchTerm,
         });
-
+        
+        console.log(response.data)
         if (response.data && typeof response.data === 'string') {
           const cleanedData = response.data.replace(/: NaN,/g, ':null,');
           const parseData = JSON.parse(cleanedData);
-          setSearchData(parseData.searchData);
-          console.log(parseData.searchData);
+          console.log(parseData)
+          setSearchData(parseData.data);
+          console.log(parseData.data);
         } else {
           setSearchData(response.data.data);
           console.log(response.data.data);
@@ -42,18 +56,6 @@ const SearchPage = () => {
       fetchData();
     }
   }, [searchTerm]);
-
-  useEffect(() => {
-    if (searchData.length > 0) {
-      const uniquePrograms = Array.from(new Set(searchData.map(program => program.image + program.clean_asset_nm)))
-        .map(uniqueKey => searchData.find(program => uniqueKey === program.image + program.clean_asset_nm));
-
-      setProgramData(uniquePrograms);
-    } else {
-      // 데이터가 없을 경우 programData를 빈 배열로 설정
-      setProgramData([]);
-    }
-  }, [searchData]);
 
 
   const openModal = (image, program) => {

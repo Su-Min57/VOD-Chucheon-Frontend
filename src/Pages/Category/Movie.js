@@ -16,14 +16,34 @@ const Movie = () => {
       button_text: '영화',
     };
 
-    axios.post('https://main.jinttoteam.com/api/main/process_button_click/', postData)
+    axios.post('http://localhost:8000/api/main/process_button_click/', postData)
     .then(response =>  {
-        setData(response.data.data);
-        console.log(response.data.data)
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
+      try {
+        // Check if response.data.data is defined and is a string
+        if (response.data && typeof response.data === 'string') {
+          // Clean the JSON string by replacing NaN with null
+          const cleanedData = response.data.replace(/: NaN,/g, ': null,');
+          
+          // Parse the cleaned JSON string
+          const parsedData = JSON.parse(cleanedData);
+          console.log(parsedData.data)
+
+          setData(parsedData.data);
+          console.log(parsedData);
+
+        } else {
+          console.error('Error: response.data.data is not a string or is undefined.');
+          setData([]); // Set data to an empty array
+        }
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+        setData([]); // Set data to an empty array
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+      setData([]); // Set data to an empty array
+    });
 }, []);
 
   const movieRef = useRef(null);
@@ -44,7 +64,7 @@ const Movie = () => {
   });
 
   const groupedData = uniqueData.reduce((acc, program) => {
-    const categoryL = program.category_l;
+    const categoryL = program.category_l2;
 
     if (!acc[categoryL]) {
       acc[categoryL] = [];
