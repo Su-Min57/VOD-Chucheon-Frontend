@@ -16,7 +16,7 @@ const TVdrama = () => {
       button_text: 'TV드라마',
     };
 
-    axios.post('https://main.jinttoteam.com/api/main/process_button_click/', postData)
+    axios.post('http://localhost:8000/api/main/process_button_click/', postData)
       .then(response => {
         setData(response.data.data);
         console.log(response.data.data)
@@ -44,7 +44,7 @@ const TVdrama = () => {
   });
 
   const groupedData = uniqueData.reduce((acc, program) => {
-    const categoryL = program.category_l;
+    const categoryL = program.category_l2;
 
     if (!acc[categoryL]) {
       acc[categoryL] = [];
