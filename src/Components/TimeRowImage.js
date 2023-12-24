@@ -34,7 +34,7 @@ const TimeRowImage = ({ data }) => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 1500,
-    arrows: true,
+    arrows: false,
   };
 
   return (
@@ -48,6 +48,7 @@ const TimeRowImage = ({ data }) => {
                   <HoverImage
                     src={program.image}
                     alt={program.asset_nm}
+                    style={{ width: "250px", height: "300px", objectFit: "cover"}}
                     onMouseEnter={(e) => e.currentTarget.classList.add('hovered')}
                     onMouseLeave={(e) => e.currentTarget.classList.remove('hovered')}
                   />

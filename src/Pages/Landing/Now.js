@@ -80,6 +80,7 @@ const StyledSlider = styled(Slider)`
     align-items: center;
     height: 400px;
     width: 952px;
+    margin-top: 1px;
 `;
 
 const DescriptionBox = styled.div`

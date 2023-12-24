@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
-import { FaHeart } from 'react-icons/fa';
 
 Modal.setAppElement('#root');
 
 const PopUp = ({ isOpen, onRequestClose, imageUrl, program }) => {
   const [showMore, setShowMore] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
 
   const handleButtonClick = (buttonType) => {
     // 버튼 클릭에 대한 동작을 추가할 수 있습니다.
     console.log(`Button clicked: ${buttonType}`);
     
-    // '좋아요' 버튼이면 상태를 토글합니다.
-    if (buttonType === 'like') {
-      setIsLiked(!isLiked);
+    // '시청하기' 버튼이면 새 창에서 페이지를 엽니다.
+    if (buttonType === 'trailer') {
+      window.open('https://www.lghellovision.net/product/tv/tvVod.do', '_blank');
     }
-
   };
 
   if (!program) {
@@ -28,10 +25,6 @@ const PopUp = ({ isOpen, onRequestClose, imageUrl, program }) => {
   const handleCloseModal = () => {
     setShowMore(false);
     onRequestClose();
-  };
-
-  const toggleShowMore = () => {
-    setShowMore(!showMore);
   };
 
   const truncatedACTR_DISP = showMore
@@ -68,40 +61,23 @@ const PopUp = ({ isOpen, onRequestClose, imageUrl, program }) => {
     >
       <PopUpContainer>
         <ImageContainer>
-          <PopUpImage src={imageUrl} alt="Popup" />
+          <PopUpImage src={imageUrl} alt="Popup" style={{ width: '300px', height: '430px', objectFit: 'cover'}} />
         </ImageContainer>
         <ContentContainer>
-          <Title>
-            {program.asset_nm}
-            <FaHeart style={{ 
-              verticalAlign: 'middle', 
-              marginBottom: '13px', 
-              marginLeft: '15px', 
-              color: isLiked ? 'red' : 'rgba(255, 255, 255, 0.5)',
-              fontSize: '40px',
-              cursor: 'pointer',
-              }} 
-              onClick={() => handleButtonClick('like')}
-            />
-          </Title>
+          <TitleContainer>
+            <Title>{program.asset_nm}</Title>
+          </TitleContainer>
           <SubDescriptionContainer>
             <SubDescription>
-                출연: {truncatedACTR_DISP}
-                  <span style={{ verticalAlign: 'middle' }}> </span>
-                  <span onClick={toggleShowMore} style={{ cursor: 'pointer', textDecoration: 'underline' }}>
-                    {showMore ? '간략히 보기' : '더보기'}
-                  </span>
-            </SubDescription>
-          </SubDescriptionContainer>
-          {showMore && (
-            <>
+              <SubDescription2>출연: {truncatedACTR_DISP}</SubDescription2>
               <SubDescription2>대분류: {program.category_h}</SubDescription2>
               <SubDescription2>소분류: {program.category_l}</SubDescription2>
-            </>
-          )}
-          <Description>{program.SMRY}</Description>
+            </SubDescription>
+          </SubDescriptionContainer>
+          <DescriptionContainer>
+            <Description>{program.SMRY || "요약을 찾지 못했습니다"}</Description>
+          </DescriptionContainer>
           <ButtonContainer>
-            <Button onClick={() => handleButtonClick('watch')}>예고편</Button>
             <Button onClick={() => handleButtonClick('trailer')}>시청하기</Button>
           </ButtonContainer>
         </ContentContainer>
@@ -117,6 +93,7 @@ const PopUpContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 20px 0px;
 `;
 
 const ImageContainer = styled.div`
@@ -124,11 +101,19 @@ const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 300px;
+  height: 430px;
+  object-fit: cover;
+  margin-left: 50px;
+  margin-right: 10px;
+  max-height: 430px;
 `;
 
 const SubDescriptionContainer = styled.div`
   display: flex;
+  flex-direction: column; 
   align-items: center;
+  margin-bottom: 20px;
 `;
 
 const ContentContainer = styled.div`
@@ -136,10 +121,9 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 20px;
-  margin-right: 10%;
-  width: 100%; /* ImageContainer와 같은 width */
-  height: 450px; /* ImageContainer와 같은 height */
+  margin-left: 80px; 
+  width: 730px;
+  height: 100%;
 `;
 
 const PopUpImage = styled.img`
@@ -150,19 +134,24 @@ const PopUpImage = styled.img`
 
 const ButtonContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: left;
+  flex-direction: column; 
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px; 
+  margin-bottom: 20px; 
 `;
 
 const Button = styled.button`
   background-color: #ed174d;
   color: white;
   padding: 10px;
-  margin: 0 30px 0 0;
+  height: 50px;
   font-size: 18px;
   cursor: pointer;
   border: none;
+  border-radius: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 `;
 
 const CloseButton = styled.button`
@@ -177,35 +166,56 @@ const CloseButton = styled.button`
   cursor: pointer;
 `;
 
-const Title = styled.p`
+const TitleContainer = styled.div`
   font-size: 40px;
   font-weight: bold;
   color: white;
-  margin-bottom: 10px;
+  margin-bottom: 10px; 
+  margin-top: 10px; 
+  max-height: 100px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const Title = styled.p`
+  padding: 0px;
   margin-top: 0px;
+  margin-bottom: 10px;
+`;
+
+const DescriptionContainer = styled.div`
+  margin-top: auto;
+  margin-bottom: 20px;
+  font-size: 17px;
+  color: white;
+  width: 550px;
+  margin-right: 100px;
 `;
 
 const Description = styled.p`
-  margin-top: 10px;
-  margin-bottom: 5rem;
+  margin-top: auto;
+  margin-bottom: 20px; 
   font-size: 17px;
   color: white;
 `;
 
 const SubDescription = styled.p`
-  font-size: 15px;
+  font-size: 17px;
   color: white;
-`;
-
-const SubDescription2 = styled.p`
-  font-size: 15px;
-  color: white;
-  margin-top: 10px;
+  margin-top: 0px;
   margin-bottom: 10px;
 `;
 
+const SubDescription2 = styled.p`
+  font-size: 17px;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 20px;
+`;
+
 const CloseButtonImage = styled.img`
-  width: 30px; /* 적절한 크기로 조절하세요 */
+  width: 30px;
   height: auto;
 `;
 
