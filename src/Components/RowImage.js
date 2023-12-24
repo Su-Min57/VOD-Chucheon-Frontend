@@ -21,7 +21,9 @@ const RowImage = ({ data }) => {
     setSelectedProgram(null);
   };
 
-  const uniqueData = data.reduce((unique, program) => {
+  const imageData = data.filter(program => program.image); 
+
+  const uniqueData = imageData.reduce((unique, program) => {
     if (!unique.find((item) => item.clean_asset_nm === program.clean_asset_nm)) {
       unique.push(program);
     }
@@ -43,18 +45,12 @@ const RowImage = ({ data }) => {
         {uniqueData.map((program, index) => (
           <SwiperSlide key={index}>
             <ImageContainer onClick={() => openModal(program.image, program)}>
-              {program.image ? (
-                <HoverImage 
+              <HoverImage
                   src={program.image}
                   alt={program.clean_asset_nm}
-                  style={{ width: '100%', height: '100%', objectFit:'contain'}}
+                  style={{ width: '220px', height: '350px', objectFit: 'cover' }}
                 />
-              ) : (
-                <NoImageContainer>
-                  <NoImageText>No Image</NoImageText>
-                </NoImageContainer>
-              )}
-              <p>{program.clean_asset_nm}</p>
+                <p>{program.clean_asset_nm}</p>
             </ImageContainer>
           </SwiperSlide>
         ))}
@@ -105,39 +101,20 @@ const ImageContainer = styled.div`
   padding: 5px;
   cursor: pointer; 
   text-align: center;
+  position: relative;
+  
   img {
-    max-width: 100%;
+    max-width: 350px;  /* Set maximum width */
+    max-height: 450px; /* Set maximum height */
+    width: auto;
     height: auto;
   }
 `;
 
-const NoImageContainer = styled.div`
-  color: gray;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid lightgray;
-  width: 100%;
-  height: 0;
-  padding-bottom: 150%;
-  box-sizing: border-box;
-`;
-
-const NoImageText = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-`;
-
 const HoverImage = styled.img`
-  max-width: 100%;
-  height: auto;
+  max-width: 220px;  /* Set maximum width */
+  max-height: 350px; /* Set maximum height */
+  object-fit: cover;
   transition: transform 0.3s;
   &:hover {
     transform: scale(1.1);

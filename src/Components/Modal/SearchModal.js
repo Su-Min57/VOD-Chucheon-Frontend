@@ -71,6 +71,20 @@ const SearchModal = ({ isOpen, onClose, onSubmit }) => {
     onClose();
   };
 
+  useEffect(() => {
+    // 모달이 열릴 때 input 요소에 포커스를 주기
+    if (isOpen) {
+      // setTimeout을 사용하여 다음 렌더링 사이클에서 포커스가 잡히도록 함
+      setTimeout(() => {
+        if (modalRef.current) {
+          const inputElement = modalRef.current.querySelector("input");
+          if (inputElement) {
+            inputElement.focus();
+          }
+        }
+      }, 0);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
 
@@ -180,11 +194,11 @@ const ModalContainer = styled.div`
 
 const SearchContainer = styled.div`
   position: relative;
-  width: 100%;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  width: 100%;
+  max-width: 500px; /* SearchButton의 크기에 따라 조절 */
+  margin: 0 auto;
 `;
 
 const SearchInput = styled.input`
@@ -205,7 +219,7 @@ const SearchInput = styled.input`
 
 const SearchButton = styled.button`
   background-color: transparent; /* 기존 배경 색상을 투명하게 변경 */
-  background-image: url('./images/open_btn_search.png'); /* 이미지 경로를 설정하세요 */
+  background-image: url('./images/search_btn_white.png'); /* 이미지 경로를 설정하세요 */
   background-size: cover;
   background-repeat: no-repeat;
   border: none;
@@ -214,6 +228,7 @@ const SearchButton = styled.button`
   cursor: pointer;
   margin-left: -35px;
   margin-bottom: 20px;
+  position: relative;
   transition: background-color 0.01s ease;
 
   &:hover {

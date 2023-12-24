@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from 'react-router-dom';
-//import Weather from "./Weather";
 
 const HeaderCategory = () => {
   const navigate = useNavigate();
@@ -22,9 +21,6 @@ const HeaderCategory = () => {
       <CategoryList active={pathname === '/main' ? 'true' : 'false'} onClick={() => changePage("/main")}>
         홈
       </CategoryList>
-      {/* <CategoryList active={pathname === '/Category/tvdrama' ? 'true' : 'false'} onClick={() => changePage("/Category/tvdrama")}>
-        얄라얄라
-      </CategoryList> */}
       <CategoryList active={pathname === '/Category/tvshow' ? 'true' : 'false'} onClick={() => changePage("/Category/tvshow")}>
         TV방송
       </CategoryList>
@@ -37,10 +33,6 @@ const HeaderCategory = () => {
       <CategoryList active={pathname === '/Category/animation' ? 'true' : 'false'} onClick={() => changePage("/Category/animation")}>
         애니메이션
       </CategoryList>
-      
-       {/* <CategoryList active={pathname === '/search' ? 'true' : 'false'} onClick={() => changePage("/search")}>
-        검색
-      </CategoryList> */}
     </Wrapper>
   );
 };
@@ -51,11 +43,11 @@ const Wrapper = styled.ul`
   height: 60px;
   background-color: #181818;
   list-style-type: none;
-  margin: 15px -100px;
+  margin: 15px -160px;
 `;
 
 const Logo = styled.li`
-  margin: 0.1px 50px 0 80px;
+  margin: 0.1px 50px 0 87px;
 `;
 
 const LogoLink = styled.a`
@@ -64,7 +56,7 @@ const LogoLink = styled.a`
 
 const LogoImg = styled.img`
   margin: 0;
-  width: 310px;
+  width: 230px;
   height: 250px;
   object-fit: contain;
   align-items: center;
@@ -73,7 +65,7 @@ const LogoImg = styled.img`
 const CategoryList = styled.li`
   color: ${props => (props.active === 'true' ? '#ED174D' : 'white')};
   font-size: 20px;
-  margin: 0px 20px 5px 60px;
+  margin: 0px 20px 5px 90px;
   position: relative;
   cursor: pointer;
 

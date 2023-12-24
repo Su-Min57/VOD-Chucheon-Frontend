@@ -70,7 +70,7 @@ const TVshow = () => {
       </ButtonContainer>
       {Object.entries(groupedData).map(([categoryL, programs]) => (
         <div key={categoryL} id={categoryL}>
-          <h2>{categoryL}</h2>
+          <h1>{categoryL}</h1>
           {/* RowImage 컴포넌트를 사용 */}
           <RowImage data={programs.slice(0, 30)} />
         </div>

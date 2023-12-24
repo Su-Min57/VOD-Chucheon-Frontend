@@ -15,9 +15,7 @@ const MainPage = () => {
   const [selectedButton, setSelectedButton] = useState(1);
   const [currentTime, setCurrentTime] = useState('');
 
-  
-
-   // Fetching data for Recommendations1 with optional hashtag
+  // Fetching data for Recommendations1 with optional hashtag
   const fetchRecommendations1 = (hashtagValue) => {
     const subsr = localStorage.getItem('subsr');
 
@@ -221,7 +219,7 @@ const MainPage = () => {
          <ButtonContainer>
             {[1, 2, 3, 4].map((num) => (
               <Button key={num} onClick={() => handleHashtagClick(num)}  isSelected={selectedButton === num}>
-                #{num === 1 ? ' 시간대🕛' : num === 2 ? ' 평일🍀' : num === 3 ? ' 주말🌟' : num === 4 ? ' 불금🔥' : ''}
+                #{num === 1 ? ' 실시간  🕛' : num === 2 ? ' 평일🍀' : num === 3 ? ' 주말🌟' : num === 4 ? ' 불금🔥' : ''}
               </Button>
             ))}
          </ButtonContainer>
@@ -330,7 +328,7 @@ bottom: 42px; /* Wrapper 아래에 위치하도록 지정 */
 left: 0; /* Wrapper 왼쪽에 위치하도록 지정 */
 width: 80px; /* 필요에 따라 크기 조절 */
 height: 80px; /* 필요에 따라 크기 조절 */
-margin-left: 35px;
+margin-left: 45px;
 background-color:transparent;
 `;
 
@@ -343,7 +341,7 @@ const TabbedDescription1 = styled.span`
 const TabbedDescription2 = styled.p`
   display: inline-block;
   padding-bottom: 5px; /* 밑줄과 텍스트 사이의 간격 조절 */
-  font-size: 15px;
+  font-size: 20px;
   margin-left: 5px;
   font-weight: normal; 
   margin-top: 25px;
@@ -353,7 +351,7 @@ const TabbedDescription2 = styled.p`
 const Description1 = styled.p`
   font-size: 2rem;
   margin-top: 22px;
-  margin-left: 20px;
+  margin-left: 50px;
   top: 0;
   color: white;
   font-weight: bold;

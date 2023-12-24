@@ -18,7 +18,7 @@ const SearchPage = () => {
       const uniquePrograms = Array.from(new Set(searchData.map(program => program.image + program.clean_asset_nm)))
         .map(uniqueKey => searchData.find(program => uniqueKey === program.image + program.clean_asset_nm));
 
-      setProgramData(uniquePrograms);
+        setProgramData(uniquePrograms.filter(program => program.image));
     } else {
       // 데이터가 없을 경우 programData를 빈 배열로 설정
       setProgramData([]);
@@ -89,7 +89,7 @@ const SearchPage = () => {
             {programData.map((program, index) => (
               <ProgramItem key={index} onClick={() => openModal(program.image, program)}>
                 {program.image ? (
-                  <HoverImage src={program.image} alt={program.clean_asset_nm} />
+                  <HoverImage src={program.image} alt={program.clean_asset_nm} style={{ width: "220px", height: "340px", objectFit: "cover" }} />
                 ) : (
                   <NoImageContainer>
                     <NoImageText>No image</NoImageText>
@@ -204,8 +204,9 @@ const NoImageContainer = styled.div`
   justify-content: center;
   align-items: center;
   border: 1px solid lightgray;
-  width: 100%;
-  height: 0;
+  width: 220px;
+  height: 340px;
+  object-fit: cover;
   padding-bottom: 150%;
   box-sizing: border-box;
   max-width: 100%;
