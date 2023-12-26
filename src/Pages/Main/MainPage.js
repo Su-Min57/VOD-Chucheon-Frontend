@@ -214,7 +214,7 @@ const MainPage = () => {
 
   return (
       <div style={{ background: 'black', color: 'white', padding: '20px' }}>
-        <h1 style={{ color: 'white' }}>헬로Pick <span style={{ color: '#ED174D' }}>MD</span>의 숨겨진 추천 Playlist 🎧</h1>
+        <h1 style={{ color: 'white' }}>헬로Pick <span style={{ color: '#ED174D' }}>MD</span>의 숨겨진 추천 VOD 프로그램</h1>
 
          <ButtonContainer>
             {[1, 2, 3, 4].map((num) => (
@@ -266,7 +266,7 @@ const MainPage = () => {
 
       <ADBanner />
       <div style={{ marginTop: '60px', marginBottom: '10px' }}>
-        <h2 style={{ marginBottom: '5px' }}> 🤖 AI가 추천해주는 Playlist </h2>
+        <h2 style={{ marginBottom: '5px' }}> 🎬 고객님이 좋아할 따끈따끈한 작품을 똑똑한 헬로pick이 가져왔어요! </h2>
         {recommendations3.length > 0 ? (
               <RowImage data={recommendations3.slice(0, 20)} />
         ) : (
@@ -276,7 +276,7 @@ const MainPage = () => {
         )}
       </div>
       <div style={{ marginTop: '40px', marginBottom: '0px' }}>
-        <h2 style={{ marginBottom: '5px' }}> 📽️ 가장 최근 본 작품과 유사한 Playlist </h2>
+        <h2 style={{ marginBottom: '5px' }}> 💯 가장 최근 본 작품이랑 유사한 프로그램이예요!  </h2>
       {recommendations4.length > 0 ? (
           <RowImage data={recommendations4.slice(0, 20)} />
       ) : (
@@ -287,7 +287,7 @@ const MainPage = () => {
       </div>
       
       <div style={{ marginTop: '-10px', marginBottom: '50px' }}>
-        <h2 style={{ marginBottom: '5px' }}> 💘 좋아하는 장르 Playlist </h2>
+        <h2 style={{ marginBottom: '5px' }}> ❤️ 고객님이 좋아하실만한 장르로 추천해드릴께요!  </h2>
         {recommendations2.length > 0 ? (
           <RowImage data={recommendations2.slice(0, 20)} />
         ) : (
