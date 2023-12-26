@@ -82,7 +82,7 @@ const PopUp = ({ isOpen, onRequestClose, imageUrl, program }) => {
           </ButtonContainer>
         </ContentContainer>
         <CloseButton onClick={onRequestClose}>
-          <CloseButtonImage src = "/images/close_icon.png" alt="Close" />
+          <CloseButtonImage src = "/images/close_iconwhite.png" alt="Close" />
         </CloseButton>
       </PopUpContainer>
     </Modal>
