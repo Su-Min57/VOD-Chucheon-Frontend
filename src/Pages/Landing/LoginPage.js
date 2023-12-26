@@ -25,6 +25,7 @@ const LoginPage = () => {
 
       if (response && response.data) {
         const { access, refresh } = response.data;
+        localStorage.setItem('subsr', subsr);
 
         if (rememberSetTopBox) {
           localStorage.setItem('subsr', subsr);
