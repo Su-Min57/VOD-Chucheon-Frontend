@@ -30,8 +30,8 @@ const PopUp = ({ isOpen, onRequestClose, imageUrl, program }) => {
   const truncatedACTR_DISP = showMore
   ? program.ACTR_DISP
   : program.ACTR_DISP.length > 20
-  ? `${program.ACTR_DISP.slice(0, 20)}...`
-  : `${program.ACTR_DISP}...`;
+  ? `${program.ACTR_DISP.slice(0, 100)}`
+  : `${program.ACTR_DISP}`;
 
 
   return (
