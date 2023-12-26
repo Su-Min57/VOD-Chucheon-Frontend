@@ -219,7 +219,7 @@ const SearchInput = styled.input`
 
 const SearchButton = styled.button`
   background-color: transparent; /* 기존 배경 색상을 투명하게 변경 */
-  background-image: url('./images/search_btn_white.png'); /* 이미지 경로를 설정하세요 */
+  background-image: url('./images/search_white.png'); /* 이미지 경로를 설정하세요 */
   background-size: cover;
   background-repeat: no-repeat;
   border: none;
