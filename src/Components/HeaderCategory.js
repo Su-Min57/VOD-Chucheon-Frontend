@@ -47,7 +47,7 @@ const Wrapper = styled.ul`
 `;
 
 const Logo = styled.li`
-  margin: 0.1px 50px 0 87px;
+  margin: 0.1px 50px 0 120px;
 `;
 
 const LogoLink = styled.a`
@@ -65,7 +65,7 @@ const LogoImg = styled.img`
 const CategoryList = styled.li`
   color: ${props => (props.active === 'true' ? '#ED174D' : 'white')};
   font-size: 20px;
-  margin: 0px 20px 5px 90px;
+  margin: 0px 20px 5px 75px;
   position: relative;
   cursor: pointer;
 
