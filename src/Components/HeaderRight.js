@@ -111,7 +111,7 @@ const NavRightLayout = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  margin-right: 50px;
+  margin-right: 240px;
 `;
 
 const NavSearchIcon = styled.img`
